@@ -1,49 +1,50 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Button } from "react-native";
-import axios from "axios";
-import AudioPlayer from "../components/AudioPlayer";
+import React, { useEffect, useState } from 'react'
+import { View, Text } from 'react-native'
+import axios from 'axios'
+import AudioPlayer from '../components/AudioPlayer'
 
 const SongScreen = ({ route }) => {
-  const { track } = route.params;
-  const [sound, setSound] = useState();
-  const [songUrl, setSongUrl] = useState(null);
+  const { track } = route.params
+  const [songUrl, setSongUrl] = useState(null)
+  const [details, setDetails] = useState(null)
 
   const getSong = async (track) => {
     const options = {
-      method: "GET",
-      url: "https://spotify-scraper.p.rapidapi.com/v1/track/download/soundcloud",
+      method: 'GET',
+      url:
+        'https://spotify-scraper.p.rapidapi.com/v1/track/download/soundcloud',
       params: { track },
       headers: {
-        "X-RapidAPI-Key": "8a640c1454msh8e45354629438f6p171b03jsn4683a7a58818",
-        "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com",
+        'X-RapidAPI-Key': 'f71f71d942mshd28daf9b4ebfb90p1c40d3jsnc8fe83d05f0e',
+        'X-RapidAPI-Host': 'spotify-scraper.p.rapidapi.com',
       },
-    };
-
-    try {
-      const { data } = await axios.request(options);
-      const { soundcloudTrack } = data;
-      setSongUrl(soundcloudTrack.audio[0].url);
-    } catch (error) {
-      console.error(error);
     }
-  };
+
+    console.log('sending request...')
+    try {
+      const { data } = await axios.request(options)
+      console.log('response received!')
+      const { soundcloudTrack, spotifyTrack } = data
+      setSongUrl(soundcloudTrack.audio[0].url)
+      setDetails(spotifyTrack)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   useEffect(() => {
-    getSong(track);
-  }, []);
+    getSong(track)
+  }, [])
 
   return (
-    <View className="items-center justify-center flex-1 bg-gray-700">
-      {songUrl ? (
-        <>
-          <Text>Now playing: {track}</Text>
-          <AudioPlayer url={songUrl} />
-        </>
+    <View className="items-center justify-center flex-1 bg-[#1C1B1B]">
+      {songUrl && details ? (
+        <AudioPlayer url={songUrl} details={details} />
       ) : (
-        <Text>Loading {track}...</Text>
+        <Text>{songUrl ? '' : 'Loading...'}</Text>
       )}
     </View>
-  );
-};
+  )
+}
 
-export default SongScreen;
+export default SongScreen
