@@ -2,25 +2,26 @@ import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native";
 import React from "react";
 import PlayIcon from "../icons/PlayIcon";
 import { useNavigation } from "@react-navigation/native";
+import { useEffect } from "react";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
-const NewSongs = ({ item }) => {
+const TodayHits = ({ item }) => {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("Song", { track: item.name })}
+      onPress={() => navigation.navigate("Song", { track: item.track.name })}
       className="mr-[14px]"
       style={{
         width: SCREEN_WIDTH * 0.3,
       }}
-      key={item.id}
+      key={item.track.id}
     >
       <View className="relative mb-[13px]">
         <Image
-          source={{ uri: item.images[0].url }}
+          source={{ uri: item.track.album.images[0].url }}
           style={{
             width: SCREEN_WIDTH * 0.3,
             height: SCREEN_HEIGHT * 0.22,
@@ -33,14 +34,14 @@ const NewSongs = ({ item }) => {
       </View>
       <View className="ml-3">
         <Text numberOfLines={1} className="text-base font-bold text-white">
-          {item.name}
+          {item.track.name}
         </Text>
         <Text numberOfLines={1} className="text-sm text-white">
-          {item.artists[0].name}
+          {item.track.album.artists[0].name}
         </Text>
       </View>
     </TouchableOpacity>
   );
 };
 
-export default NewSongs;
+export default TodayHits;
