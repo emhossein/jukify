@@ -1,45 +1,64 @@
-import { Dimensions, Image, FlatList, Text, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import throttle from '../utils/throttle'
-import NewSongs from '../components/NewSongs'
+import {
+  Dimensions,
+  Image,
+  FlatList,
+  Text,
+  View,
+  SafeAreaView,
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-const SCREEN_WIDTH = Dimensions.get('window').width
-const SCREEN_HEIGHT = Dimensions.get('window').height
+import NewSongs from "../components/Index/NewSongs";
+import NewAlbum from "../components/Index/NewAlbum";
+
+import { ONE_TOKEN } from "@env";
+import useScreenDimensions from "../hooks/useDimension";
 
 const IndexScreen = () => {
-  const [data, setData] = useState(null)
-  const [singleTracks, setSingleTracks] = useState(null)
+  const { width } = useScreenDimensions();
+
+  const [data, setData] = useState(null);
+  const [singleTracks, setSingleTracks] = useState(null);
+  const [newAlbum, setNewAlbum] = useState(null);
+  const [color, setColor] = useState(null);
 
   const getNew = async () => {
     const response = await axios.get(
-      'https://one-api.ir/spotify/?token=160224:642de2d715860&action=new',
-    )
-    setData(response.data)
-    const singles = response.data.result.albums.items.filter(
-      (item) => item.album_type === 'single',
-    )
-    setSingleTracks(singles)
-  }
+      `https://one-api.ir/spotify/?token=${ONE_TOKEN}&action=new`
+    );
+    setData(response.data);
 
-  const throttledData = throttle(getNew, 60000)
+    console.log("fetched new album");
+    const singles = response.data.result.albums.items.filter(
+      (item) => item.album_type === "single"
+    );
+    const album = response.data.result.albums.items.filter(
+      (item) => item.album_type === "album"
+    );
+    setSingleTracks(singles);
+    setNewAlbum(album[Math.floor(Math.random() * album.length)]);
+  };
+
   useEffect(() => {
-    throttledData()
-    // getNew()
-  }, [])
+    getNew();
+  }, []);
 
   return (
-    <>
+    <SafeAreaView className="bg-main flex-1">
+      <NewAlbum item={newAlbum} />
       {data && (
-        <FlatList
-          horizontal
-          data={singleTracks}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <NewSongs item={item} />}
-        />
+        <View style={{ marginLeft: width * 0.1 }}>
+          <FlatList
+            horizontal
+            data={singleTracks}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => <NewSongs item={item} />}
+          />
+        </View>
       )}
-    </>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
-export default IndexScreen
+export default IndexScreen;

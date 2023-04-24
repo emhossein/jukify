@@ -1,13 +1,13 @@
-import React from 'react'
-import { View } from 'react-native'
-import { Svg, Path } from 'react-native-svg'
+import React from "react";
+import { View } from "react-native";
+import { Svg, Path } from "react-native-svg";
 
-const PlayIcon = () => {
+const PlayIcon = ({ width, height }) => {
   return (
     <View>
       <Svg
-        width="23"
-        height="24"
+        width={width}
+        height={height}
         viewBox="0 0 15 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +18,7 @@ const PlayIcon = () => {
         />
       </Svg>
     </View>
-  )
-}
+  );
+};
 
-export default PlayIcon
+export default PlayIcon;

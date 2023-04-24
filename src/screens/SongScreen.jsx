@@ -1,50 +1,52 @@
-import React, { useEffect, useState } from 'react'
-import { View, Text } from 'react-native'
-import axios from 'axios'
-import AudioPlayer from '../components/AudioPlayer'
+import React, { useEffect, useState } from "react";
+import { View, Text, SafeAreaView } from "react-native";
+import axios from "axios";
+import AudioPlayer from "../components/AudioPlayer";
+
+import { RAPIDAPI_KEY, RAPIDAPI_HOST, XIMILAR_API_KEY } from "@env";
 
 const SongScreen = ({ route }) => {
-  const { track } = route.params
-  const [songUrl, setSongUrl] = useState(null)
-  const [details, setDetails] = useState(null)
+  const { track } = route.params;
+  const [songUrl, setSongUrl] = useState(null);
+  const [details, setDetails] = useState(null);
+  const [dominantColor, setDominantColor] = useState(null);
 
   const getSong = async (track) => {
     const options = {
-      method: 'GET',
-      url:
-        'https://spotify-scraper.p.rapidapi.com/v1/track/download/soundcloud',
+      method: "GET",
+      url: "https://spotify-scraper.p.rapidapi.com/v1/track/download/soundcloud",
       params: { track },
       headers: {
-        'X-RapidAPI-Key': 'f71f71d942mshd28daf9b4ebfb90p1c40d3jsnc8fe83d05f0e',
-        'X-RapidAPI-Host': 'spotify-scraper.p.rapidapi.com',
+        "X-RapidAPI-Key": RAPIDAPI_KEY,
+        "X-RapidAPI-Host": RAPIDAPI_HOST,
       },
-    }
+    };
 
-    console.log('sending request...')
+    console.log("sending request...");
     try {
-      const { data } = await axios.request(options)
-      console.log('response received!')
-      const { soundcloudTrack, spotifyTrack } = data
-      setSongUrl(soundcloudTrack.audio[0].url)
-      setDetails(spotifyTrack)
+      const { data } = await axios.request(options);
+      console.log("response received!");
+      const { soundcloudTrack, spotifyTrack } = data;
+      setSongUrl(soundcloudTrack.audio[0].url);
+      setDetails(spotifyTrack);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 
   useEffect(() => {
-    getSong(track)
-  }, [])
+    getSong(track);
+  }, []);
 
   return (
-    <View className="items-center justify-center flex-1 bg-[#1C1B1B]">
+    <SafeAreaView className="items-center justify-center flex-1 bg-main">
       {songUrl && details ? (
         <AudioPlayer url={songUrl} details={details} />
       ) : (
-        <Text>{songUrl ? '' : 'Loading...'}</Text>
+        <Text className="text-white">{songUrl ? "" : "Loading..."}</Text>
       )}
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
-export default SongScreen
+export default SongScreen;
