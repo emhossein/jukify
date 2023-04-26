@@ -1,73 +1,39 @@
-import {
-  Dimensions,
-  Image,
-  FlatList,
-  Text,
-  View,
-  SafeAreaView,
-} from "react-native";
+import { FlatList, View, SafeAreaView } from "react-native";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 
-import NewAlbum from "../components/Index/NewAlbum";
 import TodayHits from "../components/Index/TodayHits";
-
-import { ONE_TOKEN } from "@env";
-import { getTTH } from "../utils/getData";
 import useScreenDimensions from "../hooks/useDimension";
 
-const IndexScreen = () => {
+import { ONE_TOKEN } from "@env";
+import StickyPlayer from "../components/Player/StickyPlayer";
+import { fetchTTH } from "../store/tthSlice";
+
+const IndexScreen = ({ navigation }) => {
   const { width } = useScreenDimensions();
 
-  const [data, setData] = useState(null);
-  const [singleTracks, setSingleTracks] = useState(null);
-  const [newAlbum, setNewAlbum] = useState(null);
-  const [TTH, setTTH] = useState(null);
+  const dispatch = useDispatch();
 
-  const getNew = async () => {
-    const response = await axios.get(
-      `https://one-api.ir/spotify/?token=${ONE_TOKEN}&action=new`
-    );
-    setData(response.data);
-
-    console.log("fetched new album");
-    const singles = response.data.result.albums.items.filter(
-      (item) => item.album_type === "single"
-    );
-    const album = response.data.result.albums.items.filter(
-      (item) => item.album_type === "album"
-    );
-    setSingleTracks(singles);
-    setNewAlbum(album[Math.floor(Math.random() * album.length)]);
-  };
-
-  const handleFetch = async () => {
-    try {
-      const todaysHit = await getTTH(ONE_TOKEN);
-      setTTH(todaysHit.result.tracks.items.slice(0, 20));
-    } catch (error) {
-      console.log("tth error: ", error);
-    }
-  };
+  const tth = useSelector((state) => state.tth.data);
 
   useEffect(() => {
-    getNew();
-    handleFetch();
+    dispatch(fetchTTH(ONE_TOKEN));
   }, []);
 
   return (
     <SafeAreaView className="bg-main flex-1">
-      <NewAlbum item={newAlbum} />
-      {TTH && (
+      {tth && (
         <View style={{ marginLeft: width * 0.1 }}>
           <FlatList
             horizontal
-            data={TTH}
+            showsHorizontalScrollIndicator={false}
+            data={tth?.result.tracks.items.slice(0, 20)}
             keyExtractor={(item) => item.track.id}
             renderItem={({ item }) => <TodayHits item={item} />}
           />
         </View>
       )}
+      <StickyPlayer />
     </SafeAreaView>
   );
 };

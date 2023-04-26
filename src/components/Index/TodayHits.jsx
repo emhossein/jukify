@@ -1,8 +1,9 @@
-import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native";
+import { View, Image, Dimensions, TouchableOpacity } from "react-native";
 import React from "react";
 import PlayIcon from "../icons/PlayIcon";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
+import Typography from "../Typography";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
@@ -33,12 +34,16 @@ const TodayHits = ({ item }) => {
         </TouchableOpacity>
       </View>
       <View className="ml-3">
-        <Text numberOfLines={1} className="text-base font-bold text-white">
+        <Typography
+          bold
+          numberOfLines={1}
+          styles="text-base font-bold text-white"
+        >
           {item.track.name}
-        </Text>
-        <Text numberOfLines={1} className="text-sm text-white">
+        </Typography>
+        <Typography numberOfLines={1} styles="text-sm text-white">
           {item.track.album.artists[0].name}
-        </Text>
+        </Typography>
       </View>
     </TouchableOpacity>
   );

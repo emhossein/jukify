@@ -7,9 +7,10 @@ module.exports = {
         large: "30px",
       },
       colors: {
-        main: "#1ED760",
+        main: "#1C1B1B",
+        accent: "#333333",
         white: "#E1E1E1",
-        spotify: "#42C83C",
+        spotify: "#1ED760",
       },
     },
   },

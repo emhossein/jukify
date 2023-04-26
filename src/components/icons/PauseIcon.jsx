@@ -1,13 +1,13 @@
-import React from 'react'
-import { View } from 'react-native'
-import { Svg, Path } from 'react-native-svg'
+import React from "react";
+import { View } from "react-native";
+import { Svg, Path } from "react-native-svg";
 
-const PauseIcon = () => {
+const PauseIcon = ({ width, height }) => {
   return (
     <View>
       <Svg
-        width="10"
-        height="24"
+        width={width}
+        height={height}
         viewBox="0 0 10 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +22,7 @@ const PauseIcon = () => {
         />
       </Svg>
     </View>
-  )
-}
+  );
+};
 
-export default PauseIcon
+export default PauseIcon;
