@@ -9,6 +9,8 @@ const Typography = ({ children, numberOfLines, styles, bold }) => {
     await Font.loadAsync({
       Montserrat: require("../../assets/fonts/Montserrat-Regular.ttf"),
       MontserratBold: require("../../assets/fonts/Montserrat-Bold.ttf"),
+      Satoshi: require("../../assets/fonts/Satoshi-Regular.ttf"),
+      SatoshiBold: require("../../assets/fonts/Satoshi-Bold.ttf"),
     });
     setFontsLoaded(true);
   };
@@ -22,7 +24,7 @@ const Typography = ({ children, numberOfLines, styles, bold }) => {
       {fontsLoaded && (
         <Text
           numberOfLines={numberOfLines}
-          style={{ fontFamily: bold ? "MontserratBold" : "Montserrat" }}
+          style={{ fontFamily: bold ? "SatoshiBold" : "Satoshi" }}
           className={styles}
         >
           {children}

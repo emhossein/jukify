@@ -10,9 +10,12 @@
 
 - Implement with redux
 
+###v.0.0.3
+
+- Change from spotify scrapper to [soundcloud-downloader](https://rapidapi.com/TTKTrungKien/api/soundcloud-downloader4/)
+
 ##TODOS
 
 - implement a functionality that don't change the state of the Song screen if user tap on the same song
 - open song screen from bottom to top in android
-- Change from spotify scrapper to [soundcloud-downloader](https://rapidapi.com/TTKTrungKien/api/soundcloud-downloader4/)
 - Try to work with [spotify-web-api-js](https://github.com/JMPerez/spotify-web-api-js)

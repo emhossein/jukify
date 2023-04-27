@@ -5,10 +5,12 @@ import Typography from "../Typography";
 import PlayIcon from "../icons/PlayIcon";
 import PauseIcon from "../icons/PauseIcon";
 import { playPause, selectAudioPlayer } from "../../store/audioPlayerSlice";
+import { show, toggle } from "../../store/showSlice";
 
 const StickyPlayer = () => {
   const { artist, title, musicImage, isPlaying } =
     useSelector(selectAudioPlayer);
+  const { shown } = useSelector((state) => state.show);
   const dispatch = useDispatch();
 
   const handlePlayPause = () => {
@@ -17,15 +19,19 @@ const StickyPlayer = () => {
 
   return (
     <>
-      {title && (
-        <View
-          onPress={() => navigation.pop()}
+      {!shown && title && (
+        <TouchableOpacity
+          onPress={() => dispatch(toggle())}
           className="absolute bottom-0 flex-row items-center justify-between w-full bg-accent p-2 py-3"
         >
           <View className="flex-row">
             <Image source={{ uri: musicImage }} className="w-12 h-12 mr-3" />
             <View>
-              <Typography styles="text-white text-[12px]" bold>
+              <Typography
+                numberOfLines={2}
+                styles="text-white text-[12px]"
+                bold
+              >
                 {title}
               </Typography>
               <Typography styles="text-white text-[10px]">{artist}</Typography>
@@ -41,7 +47,7 @@ const StickyPlayer = () => {
               <PlayIcon width="16" height="16" />
             )}
           </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
       )}
     </>
   );

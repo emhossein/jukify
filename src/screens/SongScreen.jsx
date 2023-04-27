@@ -1,31 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, SafeAreaView } from "react-native";
-import axios from "axios";
+import React, { useEffect } from "react";
+import { Text, SafeAreaView } from "react-native";
 import AudioPlayer from "../components/Player/AudioPlayer";
 
-import { RAPIDAPI_KEY, RAPIDAPI_HOST } from "@env";
+import { RAPIDAPI_KEY, ONE_TOKEN } from "@env";
 import { useDispatch, useSelector } from "react-redux";
-import { setMusicDetails, setUri } from "../store/audioPlayerSlice";
-import { fetchSong } from "../store/songDataSlice";
 
-const SongScreen = ({ route }) => {
-  const { track } = route.params;
+import { downloadSong } from "../store/songDownload";
+import { selectAudioPlayer } from "../store/audioPlayerSlice";
+import { hide, show, toggle } from "../store/showSlice";
+import Typography from "../components/Typography";
 
+const SongScreen = () => {
   const dispatch = useDispatch();
-  const { songUrl, details, status, error } = useSelector(
-    (state) => state.song
-  );
+
+  const { artist, title } = useSelector(selectAudioPlayer);
+  const { data, status } = useSelector((state) => state.download);
 
   useEffect(() => {
-    dispatch(fetchSong(track, RAPIDAPI_KEY, RAPIDAPI_HOST));
-  }, []);
+    dispatch(
+      downloadSong({
+        artist,
+        track: title,
+        apiKey: RAPIDAPI_KEY,
+        oneKey: ONE_TOKEN,
+      })
+    );
+  }, [title]);
 
   return (
     <SafeAreaView className="items-center justify-center flex-1 bg-main">
-      {status === "fulfilled" ? (
-        <AudioPlayer url={songUrl} details={details} />
+      {status === "succeeded" ? (
+        <AudioPlayer details={data?.result} />
       ) : (
-        <Text className="text-white">{songUrl ? "" : "Loading..."}</Text>
+        <Typography styles="text-white">Loading...</Typography>
       )}
     </SafeAreaView>
   );

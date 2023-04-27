@@ -1,22 +1,41 @@
-import { View, Image, Dimensions, TouchableOpacity } from "react-native";
-import React from "react";
-import PlayIcon from "../icons/PlayIcon";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { useEffect } from "react";
-import Typography from "../Typography";
+import { View, Image, TouchableOpacity } from "react-native";
 
-const SCREEN_WIDTH = Dimensions.get("window").width;
-const SCREEN_HEIGHT = Dimensions.get("window").height;
+import Typography from "../Typography";
+import PlayIcon from "../icons/PlayIcon";
+import downloadSong from "../../store/songDownload";
+import useScreenDimensions from "../../hooks/useDimension";
+import {
+  setArtist,
+  setMusicImage,
+  setTitle,
+} from "../../store/audioPlayerSlice";
+import { show, toggle } from "../../store/showSlice";
+
+import { RAPIDAPI_KEY, ONE_TOKEN } from "@env";
 
 const TodayHits = ({ item }) => {
   const navigation = useNavigation();
+  const { width, height } = useScreenDimensions();
+
+  const dispatch = useDispatch();
+  const { shown } = useSelector((state) => state.show);
+  const { data } = useSelector((state) => state.download);
+
+  const handlePress = () => {
+    dispatch(setTitle(item.track.name));
+    dispatch(setArtist(item.track.artists[0].name));
+    dispatch(setMusicImage(item.track.album.images[0].url));
+    dispatch(toggle());
+  };
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("Song", { track: item.track.name })}
+      onPress={handlePress}
       className="mr-[14px]"
       style={{
-        width: SCREEN_WIDTH * 0.3,
+        width: width * 0.3,
       }}
       key={item.track.id}
     >
@@ -24,12 +43,12 @@ const TodayHits = ({ item }) => {
         <Image
           source={{ uri: item.track.album.images[0].url }}
           style={{
-            width: SCREEN_WIDTH * 0.3,
-            height: SCREEN_HEIGHT * 0.22,
+            width: width * 0.3,
+            height: height * 0.22,
             borderRadius: 30,
           }}
         />
-        <TouchableOpacity className="absolute -bottom-2 right-3 rounded-full w-[29px] h-[29px] bg-[#2C2C2C] items-center justify-center">
+        <TouchableOpacity className="absolute -bottom-2 right-3 rounded-full w-[29px] h-[29px] bg-accent items-center justify-center">
           <PlayIcon width="14" height="14" />
         </TouchableOpacity>
       </View>
