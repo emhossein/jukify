@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import audioPlayerReducer from "./audioPlayerSlice";
+
 import tthReducer from "./tthSlice";
-import songReducer from "./songDataSlice";
-import dlReducer from "./songDownload";
 import showSlice from "./showSlice";
+import dlReducer from "./songDownload";
+import lyricsSlice from "./lyricsSlice";
+import songReducer from "./songDataSlice";
+import audioPlayerReducer from "./audioPlayerSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +14,7 @@ const store = configureStore({
     song: songReducer,
     download: dlReducer,
     show: showSlice,
+    lyrics: lyricsSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

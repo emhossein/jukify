@@ -19,3 +19,4 @@
 - implement a functionality that don't change the state of the Song screen if user tap on the same song
 - open song screen from bottom to top in android
 - Try to work with [spotify-web-api-js](https://github.com/JMPerez/spotify-web-api-js)
+- lyrics implementation

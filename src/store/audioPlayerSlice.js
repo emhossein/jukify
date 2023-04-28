@@ -72,33 +72,36 @@ export const {
   setMusicDetails,
 } = audioPlayerSlice.actions;
 
-export const loadSound =
-  (url, title, artist, image) => async (dispatch, getState) => {
-    const { sound } = getState().audioPlayer;
-    if (sound) {
-      dispatch(stopSound());
-    }
-    try {
-      const { sound: newSound } = await Audio.Sound.createAsync(
-        { uri: url },
-        { shouldPlay: true }
-      );
-      const status = await newSound.getStatusAsync();
-      dispatch(setSound(newSound));
-      dispatch(setUri(url));
-      dispatch(setDuration(status.durationMillis));
-      dispatch(setPosition(status.positionMillis));
-      dispatch(setTitle(title));
-      dispatch(setArtist(artist));
-      dispatch(setMusicImage(image));
-      await newSound.setOnPlaybackStatusUpdate((status) => {
-        if (status.isLoaded) {
-          dispatch(setIsPlaying(status.isPlaying));
-          dispatch(setPosition(status.positionMillis));
+export const loadSound = (url) => async (dispatch, getState) => {
+  const { sound } = getState().audioPlayer;
+  if (sound) {
+    dispatch(stopSound());
+  }
+  try {
+    const { sound: newSound } = await Audio.Sound.createAsync(
+      { uri: url },
+      { shouldPlay: true }
+    );
+    const status = await newSound.getStatusAsync();
+    dispatch(setSound(newSound));
+    dispatch(setUri(url));
+    dispatch(setDuration(status.durationMillis));
+    dispatch(setPosition(status.positionMillis));
+    await newSound.setOnPlaybackStatusUpdate(async (status) => {
+      if (status.isLoaded) {
+        dispatch(setIsPlaying(status.isPlaying));
+        dispatch(setPosition(status.positionMillis));
+
+        if (status.didJustFinish) {
+          // Song duration reached, stop the current sound and load a new one
+          await newSound.stopAsync();
+          dispatch(stopSound());
+          dispatch(loadSound(url));
         }
-      });
-    } catch (error) {}
-  };
+      }
+    });
+  } catch (error) {}
+};
 
 export const playPause = () => async (dispatch, getState) => {
   const { sound, isPlaying } = getState().audioPlayer;

@@ -8,6 +8,7 @@ import SongScreen from "./src/screens/SongScreen";
 import IndexScreen from "./src/screens/IndexScreen";
 import { Text } from "react-native";
 import Player from "./src/components/Player/Player";
+import LyricsScreen from "./src/screens/LyricsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,9 +24,18 @@ export default function App() {
               headerShown: false,
             }}
           />
+
+          <Stack.Screen
+            name="Lyrics"
+            component={LyricsScreen}
+            options={{
+              headerShown: false,
+              presentation: "modal",
+            }}
+          />
         </Stack.Navigator>
+        <Player />
       </NavigationContainer>
-      <Player />
     </Provider>
   );
 }

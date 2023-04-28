@@ -20,8 +20,6 @@ const TodayHits = ({ item }) => {
   const { width, height } = useScreenDimensions();
 
   const dispatch = useDispatch();
-  const { shown } = useSelector((state) => state.show);
-  const { data } = useSelector((state) => state.download);
 
   const handlePress = () => {
     dispatch(setTitle(item.track.name));

@@ -1,9 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const RAPIDAPI_KEY = "your-rapidapi-key";
-const RAPIDAPI_HOST = "spotify-scraper.p.rapidapi.com";
-
 export const fetchSong = createAsyncThunk(
   "song/fetchSong",
   async (track, apiKey, apiHost) => {
@@ -46,7 +43,7 @@ const songSlice = createSlice({
         state.status = "pending";
       })
       .addCase(fetchSong.fulfilled, (state, action) => {
-        state.status = "fulfilled";
+        state.status = "succeeded";
         state.songUrl = action.payload.songUrl;
         state.details = action.payload.details;
       })
