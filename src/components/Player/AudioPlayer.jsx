@@ -20,12 +20,12 @@ import {
 } from "../../store/audioPlayerSlice";
 import PlayIcon from "../icons/PlayIcon";
 import PauseIcon from "../icons/PauseIcon";
-import { hide, toggle } from "../../store/showSlice";
+import { toggle } from "../../store/showSlice";
 import useScreenDimensions from "../../hooks/useDimension";
 import BackIcon from "../icons/BackIcon";
 import MoreIcon from "../icons/MoreIcon";
 import UpIcon from "../icons/UpIcon";
-import { toggleLyrics } from "../../store/lyricsSlice";
+import formatDuration from "../../utils/formatDuration";
 
 const AudioPlayer = ({ details }) => {
   const navigation = useNavigation();
@@ -82,12 +82,6 @@ const AudioPlayer = ({ details }) => {
     },
     [dispatch]
   );
-
-  const formatDuration = (ms) => {
-    const minutes = Math.floor(ms / 60000);
-    const seconds = ((ms % 60000) / 1000).toFixed(0);
-    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-  };
 
   const handlePlayPause = () => {
     dispatch(playPause());

@@ -87,7 +87,7 @@ export const loadSound = (url) => async (dispatch, getState) => {
     dispatch(setUri(url));
     dispatch(setDuration(status.durationMillis));
     dispatch(setPosition(status.positionMillis));
-    await newSound.setOnPlaybackStatusUpdate(async (status) => {
+    newSound.setOnPlaybackStatusUpdate(async (status) => {
       if (status.isLoaded) {
         dispatch(setIsPlaying(status.isPlaying));
         dispatch(setPosition(status.positionMillis));

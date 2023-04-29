@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0, 0, 0, 0.4)", // Adjust opacity as needed
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
   },
 });
 

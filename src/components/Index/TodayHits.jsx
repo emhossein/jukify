@@ -4,7 +4,6 @@ import { View, Image, TouchableOpacity } from "react-native";
 
 import Typography from "../Typography";
 import PlayIcon from "../icons/PlayIcon";
-import downloadSong from "../../store/songDownload";
 import useScreenDimensions from "../../hooks/useDimension";
 import {
   setArtist,

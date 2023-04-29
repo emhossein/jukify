@@ -1,20 +1,22 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import tthReducer from "./tthSlice";
-import showSlice from "./showSlice";
+import showReducer from "./showSlice";
 import dlReducer from "./songDownload";
-import lyricsSlice from "./lyricsSlice";
-import songReducer from "./songDataSlice";
+import lyricsReducer from "./lyricsSlice";
 import audioPlayerReducer from "./audioPlayerSlice";
+import indexPlaylistReducer from "./indexPlaylistSlice";
+import playlistReducer from "./playlistDetailSlice";
 
 const store = configureStore({
   reducer: {
     audioPlayer: audioPlayerReducer,
     tth: tthReducer,
-    song: songReducer,
     download: dlReducer,
-    show: showSlice,
-    lyrics: lyricsSlice,
+    show: showReducer,
+    lyrics: lyricsReducer,
+    indexPlaylist: indexPlaylistReducer,
+    playlist: playlistReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

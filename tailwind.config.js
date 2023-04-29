@@ -10,6 +10,7 @@ module.exports = {
         main: "#1C1B1B",
         accent: "#333333",
         white: "#E1E1E1",
+        "white-light": "#D3D3D3",
         spotify: "#1ED760",
       },
     },
