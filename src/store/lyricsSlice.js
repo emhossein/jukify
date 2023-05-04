@@ -8,6 +8,8 @@ export const fetchLyrics = createAsyncThunk(
       `https://some-random-api.ml/lyrics?title=${artist + " _ " + title}`
     );
 
+    console.log(`fetching lyrics: ${artist + " _ " + title}`);
+
     return response.data;
   }
 );

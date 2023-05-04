@@ -8,10 +8,8 @@ const PlayList = ({ title, data }) => {
   const { width } = useScreenDimensions();
 
   return (
-    <View style={{ marginLeft: width * 0.1, marginTop: 20 }}>
-      <Typography bold styles="text-white text-xl mb-3 ">
-        {title}
-      </Typography>
+    <View style={{ marginTop: 20 }}>
+      <Typography styles="text-white text-base mb-3">{title}</Typography>
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}

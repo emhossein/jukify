@@ -1,44 +1,52 @@
-import { Provider, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import store from "./src/store/index";
-import IndexScreen from "./src/screens/IndexScreen";
 import Player from "./src/components/Player/Player";
-import LyricsScreen from "./src/screens/LyricsScreen";
-import PlayListScreen from "./src/screens/PlayListScreen";
+import HomeIcon from "./src/components/icons/HomeIcon";
+import SearchIcon from "./src/components/icons/SearchIcon";
 import StickyPlayer from "./src/components/Player/StickyPlayer";
+import { HomeScreen, SearchBarScreen } from "./src/screens/Index";
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen
-            name="Home"
-            component={IndexScreen}
+        <Tab.Navigator
+          initialRouteName="HomeTab"
+          screenOptions={{
+            headerShown: false,
+            tabBarStyle: {
+              backgroundColor: "#333333",
+              borderTopColor: "#333333",
+              height: 53,
+            },
+          }}
+        >
+          <Tab.Screen
+            name="HomeTab"
+            component={HomeScreen}
             options={{
-              headerShown: false,
+              tabBarLabelStyle: { display: "none" },
+              tabBarIcon: ({ focused, color, size }) => (
+                <HomeIcon iconColor={focused ? "#1ED760" : "#D3D3D3"} />
+              ),
             }}
           />
-          <Stack.Screen
-            name="Lyrics"
-            component={LyricsScreen}
+          <Tab.Screen
+            name="SearchTab"
+            component={SearchBarScreen}
             options={{
-              headerShown: false,
-              presentation: "modal",
+              tabBarLabelStyle: { display: "none" },
+              tabBarIcon: ({ focused, color, size }) => (
+                <SearchIcon iconColor={focused ? "#1ED760" : "#D3D3D3"} />
+              ),
             }}
           />
-          <Stack.Screen
-            name="PlayList"
-            component={PlayListScreen}
-            options={{
-              headerShown: false,
-            }}
-          />
-        </Stack.Navigator>
+        </Tab.Navigator>
         <StickyPlayer />
         <Player />
       </NavigationContainer>

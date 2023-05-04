@@ -22,7 +22,7 @@ const StickyPlayer = () => {
       {!shown && title && (
         <TouchableOpacity
           onPress={() => dispatch(toggle())}
-          className="absolute bottom-0 self-center flex-row items-center justify-between w-[97%] bg-accent p-2 py-3 rounded-lg"
+          className="absolute bottom-[57px] self-center flex-row items-center justify-between w-[97%] bg-accent p-2 py-3 rounded-lg"
         >
           <View className="flex-row">
             <Image

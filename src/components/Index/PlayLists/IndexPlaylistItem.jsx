@@ -10,12 +10,15 @@ const IndexPlaylistItem = ({ item }) => {
 
   const imageUrl = item?.data?.images?.items[0].sources[0].url;
 
-  // Image.prefetch(imageUrl);
-
   if (item.data) {
     return (
       <TouchableOpacity
-        onPress={() => navigation.navigate("PlayList", { uri: item.data.uri })}
+        onPress={() =>
+          navigation.navigate("SearchTab", {
+            screen: "PlayList",
+            params: { uri: item.data.uri },
+          })
+        }
         className="overflow-hidden truncate"
       >
         <Image
@@ -23,12 +26,12 @@ const IndexPlaylistItem = ({ item }) => {
           style={{
             width: width * 0.36,
             height: height * 0.2025,
-            borderRadius: 30,
+            borderRadius: 8,
             marginRight: 14,
           }}
           onError={(err) => null}
         />
-        <Typography bold styles="text-white text-[13px] mt-[13px] ml-3">
+        <Typography bold styles="text-white text-[13px] mt-[10px] ml-1">
           {item.data.name.length > 15
             ? item.data.name.substring(0, 15) + "..."
             : item.data.name}

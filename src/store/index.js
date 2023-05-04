@@ -7,6 +7,8 @@ import lyricsReducer from "./lyricsSlice";
 import audioPlayerReducer from "./audioPlayerSlice";
 import indexPlaylistReducer from "./indexPlaylistSlice";
 import playlistReducer from "./playlistDetailSlice";
+import newAlbumsReducer from "./newAlbumsSlice";
+import albumDetailsReducer from "./albumDetailsSlice";
 
 const store = configureStore({
   reducer: {
@@ -17,6 +19,8 @@ const store = configureStore({
     lyrics: lyricsReducer,
     indexPlaylist: indexPlaylistReducer,
     playlist: playlistReducer,
+    newAlbums: newAlbumsReducer,
+    albumDetails: albumDetailsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -1,38 +1,26 @@
-import { useEffect, useState, useCallback, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { View, Image, TouchableOpacity } from "react-native";
-
+import { View, Text, Image, TouchableOpacity } from "react-native";
+import React from "react";
+import { useEffect } from "react";
+import { fetchAlbumDetails } from "../store/albumDetailsSlice";
 import { ONE_TOKEN } from "@env";
-
-import Typography from "../components/Typography";
-import MoreIcon from "../components/icons/MoreIcon";
-import BackIcon from "../components/icons/BackIcon";
+import { useDispatch, useSelector } from "react-redux";
 import useScreenDimensions from "../hooks/useDimension";
-import PlayListTrack from "../components/Index/PlayLists/PlayListTrack";
-import { fetchPlaylistDetails } from "../store/playlistDetailSlice";
+import BackIcon from "../components/icons/BackIcon";
+import MoreIcon from "../components/icons/MoreIcon";
 import BigList from "react-native-big-list";
+import Typography from "../components/Typography";
+import PlayListTrack from "../components/Index/PlayLists/PlayListTrack";
+import AlbumTrack from "../components/Album/AlbumTrack";
 
-const PlayListScreen = ({ route, navigation }) => {
-  const { uri } = route.params;
+const AlbumScreen = ({ route, navigation }) => {
+  const { id } = route.params;
   const { width, height } = useScreenDimensions();
-
   const dispatch = useDispatch();
-  const { playlistDetails, status } = useSelector((state) => state.playlist);
-
-  const item = playlistDetails?.result;
-
-  const getItemLayout = (data, index) => {
-    return { length: 60, offset: 50 * index, index };
-  };
+  const { data, status } = useSelector((state) => state.albumDetails);
 
   useEffect(() => {
-    if (!playlistDetails) {
-      dispatch(
-        fetchPlaylistDetails({
-          oneKey: ONE_TOKEN,
-          playlistId: uri.split(":")[2],
-        })
-      );
+    if (!data) {
+      dispatch(fetchAlbumDetails({ id, oneKey: ONE_TOKEN }));
     }
   }, []);
 
@@ -41,12 +29,16 @@ const PlayListScreen = ({ route, navigation }) => {
     navigation.push("Search");
   };
 
+  const getItemLayout = (data, index) => {
+    return { length: 60, offset: 50 * index, index };
+  };
+
   return (
-    <View className="bg-main flex-1">
+    <View className="flex-1 bg-main">
       {status === "succeeded" && (
-        <View className="relative flex-1 items-center bg-main">
+        <View className="relative flex-1 items-center">
           <Image
-            source={{ uri: item?.images[0].url }}
+            source={{ uri: data?.result.images[0].url }}
             style={{ width: "100%", height: height * 0.3516 }}
             className="rounded-b-[69px]"
           />
@@ -66,25 +58,25 @@ const PlayListScreen = ({ route, navigation }) => {
               <MoreIcon />
             </TouchableOpacity>
           </View>
-
           <BigList
             getItemLayout={getItemLayout}
             showsVerticalScrollIndicator={false}
-            headerHeight={180}
+            headerHeight={140}
             renderHeader={() => (
               <View className="w-full items-center">
                 <View className="items-center" style={{ width: width * 0.8 }}>
                   <Typography bold styles="text-white text-xl mt-3">
-                    {item?.name}
+                    {data?.result.name}
                   </Typography>
-                  <Typography styles="text-white-light text-[13px] mt-[6px]">
-                    {item?.tracks.items.length} Track
-                  </Typography>
+
                   <Typography
-                    numberOfLines={3}
+                    numberOfLines={2}
                     styles="text-center text-white-light text-xs mt-[10px]"
                   >
-                    {item?.description.replace(/<\/?[^>]+(>|$)/g, "")}
+                    {data?.result.artists[0].name}
+                  </Typography>
+                  <Typography styles="text-white-light text-[10px] mt-[6px]">
+                    {data?.result.tracks.items.length} Track
                   </Typography>
                 </View>
                 <View style={{ width: width * 0.8 }}>
@@ -94,9 +86,11 @@ const PlayListScreen = ({ route, navigation }) => {
                 </View>
               </View>
             )}
-            data={item.tracks.items}
-            keyExtractor={(item) => item.track.id}
-            renderItem={({ item }) => <PlayListTrack item={item} />}
+            data={data?.result.tracks.items}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <AlbumTrack image={data?.result.images[0].url} item={item} />
+            )}
           />
         </View>
       )}
@@ -104,6 +98,4 @@ const PlayListScreen = ({ route, navigation }) => {
   );
 };
 
-export default PlayListScreen;
-
-// width : 35.16%
+export default AlbumScreen;

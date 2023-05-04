@@ -35,14 +35,17 @@ const AudioPlayer = ({ details }) => {
 
   const { sound, duration, position, isPlaying, title, artist, musicImage } =
     useSelector(selectAudioPlayer);
-  const { data } = useSelector((state) => state.download);
+  const { data, status } = useSelector((state) => state.download);
   const { showLyrics } = useSelector((state) => state.lyrics);
+  const { shown } = useSelector((state) => state.show);
 
   const handleBackButton = () => {
     if (showLyrics) {
       handleShowLyrics();
     } else {
-      dispatch(toggle());
+      if (shown) {
+        dispatch(toggle());
+      }
     }
   };
 
@@ -54,18 +57,19 @@ const AudioPlayer = ({ details }) => {
   }, []);
 
   useEffect(() => {
-    if (data === null) {
-      dispatch(loadSound(details?.formats[1].url));
-    } else {
-      dispatch(loadSound(data?.result.formats[1].url));
+    if (status === "succeeded") {
+      if (data === null) {
+        dispatch(loadSound(details?.formats[1].url));
+      } else {
+        dispatch(loadSound(data?.result.formats[1].url));
+      }
     }
-
     return () => {
       if (sound) {
         sound.unloadAsync();
       }
     };
-  }, []);
+  }, [title, artist]);
 
   useEffect(() => {
     const interval = setInterval(() => {

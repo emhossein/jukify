@@ -1,8 +1,7 @@
-import { View, Text, BackHandler } from "react-native";
-import React from "react";
+import { View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { hide, toggle } from "../../store/showSlice";
-import { useEffect } from "react";
+
+import { toggle } from "../../store/showSlice";
 import SongScreen from "./../../screens/SongScreen";
 
 const Test = () => {
