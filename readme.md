@@ -22,6 +22,10 @@
 
 - Add ability to play songs in playlist screen
 
+###v.0.0.6
+
+- Add tabs for navigation and album detail screen. Update UI style.
+
 ##TODOS
 
 - implement a functionality that don't change the state of the Song screen if user tap on the same song
