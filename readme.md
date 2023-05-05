@@ -13,6 +13,10 @@ This is a music player app built using React Native. The app allows users to sea
 
 ## Changelog
 
+### v.0.1.2
+
+- fix small bugs and ui problems
+
 ### v.0.1.1
 
 - Modify ui for android devices
