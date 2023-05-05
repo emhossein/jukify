@@ -19,14 +19,14 @@ const AlbumScreen = ({ route, navigation }) => {
   const { data, status } = useSelector((state) => state.albumDetails);
 
   useEffect(() => {
-    if (!data) {
-      dispatch(fetchAlbumDetails({ id, oneKey: ONE_TOKEN }));
-    }
+    // if (!data) {
+    dispatch(fetchAlbumDetails({ id, oneKey: ONE_TOKEN }));
+    // }
   }, []);
 
   const handleBackButton = () => {
-    // navigation.goBack();
-    navigation.push("Search");
+    navigation.goBack();
+    // navigation.push("Search");
   };
 
   const getItemLayout = (data, index) => {

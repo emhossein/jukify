@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FlatList, View, SafeAreaView, ScrollView } from "react-native";
+import { FlatList, View, SafeAreaView, ScrollView, Image } from "react-native";
 
 import { fetchTTH } from "../store/tthSlice";
 import Typography from "../components/Typography";
@@ -14,7 +14,9 @@ import { ONE_TOKEN, RAPIDAPI_KEY } from "@env";
 import TodayHitsButton from "../components/Index/TodayHitsButton";
 import { fetchNewAlbums } from "../store/newAlbumsSlice";
 import IndexPlaylistItem from "../components/Index/PlayLists/IndexPlaylistItem";
-import NewAlbum from "../components/Album/NewAlbum";
+import NewAlbum from "../components/Album/Album";
+import { fetchTopArtists } from "../store/topArtistsSlice";
+import Artist from "../components/Artist/Artist";
 
 const IndexScreen = () => {
   const { width } = useScreenDimensions();
@@ -26,6 +28,9 @@ const IndexScreen = () => {
     status: newAlbumsStatus,
     error,
   } = useSelector((state) => state.newAlbums);
+  const { data: artists, status: artistsStatus } = useSelector(
+    (state) => state.topArtists
+  );
   const { data, status } = useSelector((state) => state.indexPlaylist);
 
   const tthButtonCover = tth?.result?.tracks?.items
@@ -33,16 +38,22 @@ const IndexScreen = () => {
     .map((item) => item.track.album.images[0].url);
 
   useEffect(() => {
-    if (!tth || !data || !newAlbums) {
-      dispatch(fetchTTH(ONE_TOKEN));
-      dispatch(fetchNewAlbums({ apiKey: RAPIDAPI_KEY }));
-      dispatch(fetchIndexPlayList({ apiKey: RAPIDAPI_KEY }));
-    }
-    console.log(error);
+    // if (!tth || !data || !newAlbums || !artists) {
+    dispatch(fetchTTH(ONE_TOKEN));
+    dispatch(fetchNewAlbums({ apiKey: RAPIDAPI_KEY }));
+    dispatch(fetchIndexPlayList({ apiKey: RAPIDAPI_KEY }));
+    dispatch(fetchTopArtists({ apiKey: RAPIDAPI_KEY }));
+    // }
   }, []);
 
   return (
     <SafeAreaView className="bg-main flex-1">
+      <SafeAreaView className="items-center mb-4">
+        <Image
+          source={require("../../assets/Spotify-logo-dark.png")}
+          className="w-32 h-7"
+        />
+      </SafeAreaView>
       <ScrollView showsVerticalScrollIndicator={false}>
         {tthStatus === "succeeded" && (
           <View className="ml-[10%] mb-6">
@@ -70,6 +81,16 @@ const IndexScreen = () => {
             <PlayList title="Fresh New Musics" data={data.freshNewMusic} />
             {/* <PlayList title="Sing Along" data={data.singAlong} />
             <PlayList title="Happy" data={data.happy} /> */}
+            <Typography styles="text-white text-base mb-3 mt-5">
+              Popular Artists
+            </Typography>
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={artists?.artists}
+              keyExtractor={(item) => item?.id}
+              renderItem={({ item }) => <Artist item={item} />}
+            />
           </View>
         )}
       </ScrollView>

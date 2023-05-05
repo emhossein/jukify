@@ -19,9 +19,9 @@ const TTHScreen = ({ navigation }) => {
   const { data: tth, status: tthStatus } = useSelector((state) => state.tth);
 
   useEffect(() => {
-    if (!tth) {
-      dispatch(fetchTTH(ONE_TOKEN));
-    }
+    // if (!tth) {
+    dispatch(fetchTTH(ONE_TOKEN));
+    // }
   }, []);
 
   const getItemLayout = (data, index) => {
@@ -29,8 +29,8 @@ const TTHScreen = ({ navigation }) => {
   };
 
   const handleBackButton = () => {
-    navigation.push("Search");
-    // navigation.goBack();
+    // navigation.push("Search");
+    navigation.goBack();
   };
 
   return (

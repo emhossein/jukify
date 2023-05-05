@@ -3,12 +3,15 @@ import { configureStore } from "@reduxjs/toolkit";
 import tthReducer from "./tthSlice";
 import showReducer from "./showSlice";
 import dlReducer from "./songDownload";
+import searchReducer from "./searchSlice";
 import lyricsReducer from "./lyricsSlice";
-import audioPlayerReducer from "./audioPlayerSlice";
-import indexPlaylistReducer from "./indexPlaylistSlice";
-import playlistReducer from "./playlistDetailSlice";
 import newAlbumsReducer from "./newAlbumsSlice";
+import topArtistsReducer from "./topArtistsSlice";
+import playlistReducer from "./playlistDetailSlice";
+import audioPlayerReducer from "./audioPlayerSlice";
+import artistDetailReducer from "./artistDetailSlice";
 import albumDetailsReducer from "./albumDetailsSlice";
+import indexPlaylistReducer from "./indexPlaylistSlice";
 
 const store = configureStore({
   reducer: {
@@ -21,6 +24,9 @@ const store = configureStore({
     playlist: playlistReducer,
     newAlbums: newAlbumsReducer,
     albumDetails: albumDetailsReducer,
+    topArtists: topArtistsReducer,
+    artistDetail: artistDetailReducer,
+    searchData: searchReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

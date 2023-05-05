@@ -26,19 +26,19 @@ const PlayListScreen = ({ route, navigation }) => {
   };
 
   useEffect(() => {
-    if (!playlistDetails) {
-      dispatch(
-        fetchPlaylistDetails({
-          oneKey: ONE_TOKEN,
-          playlistId: uri.split(":")[2],
-        })
-      );
-    }
+    // if (!playlistDetails) {
+    dispatch(
+      fetchPlaylistDetails({
+        oneKey: ONE_TOKEN,
+        playlistId: uri.split(":")[2],
+      })
+    );
+    // }
   }, []);
 
   const handleBackButton = () => {
-    // navigation.goBack();
-    navigation.push("Search");
+    navigation.goBack();
+    // navigation.push("Search");
   };
 
   return (
@@ -70,7 +70,7 @@ const PlayListScreen = ({ route, navigation }) => {
           <BigList
             getItemLayout={getItemLayout}
             showsVerticalScrollIndicator={false}
-            headerHeight={180}
+            headerHeight={250}
             renderHeader={() => (
               <View className="w-full items-center">
                 <View className="items-center" style={{ width: width * 0.8 }}>

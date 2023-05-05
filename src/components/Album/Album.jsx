@@ -11,7 +11,7 @@ const NewAlbum = ({ item }) => {
   return (
     <TouchableOpacity
       onPress={() =>
-        navigation.navigate("SearchTab", {
+        navigation.navigate("HomeTab", {
           screen: "Album",
           params: { id: item.id },
         })

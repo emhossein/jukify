@@ -7,6 +7,7 @@ import PlayListScreen from "./PlayListScreen";
 import SearchScreen from "./SearchScreen";
 import TTHScreen from "./TTHScreen";
 import AlbumScreen from "./AlbumScreen";
+import ArtistDetailScreen from "./ArtistDetailScreen";
 
 const HomeStack = createNativeStackNavigator();
 const SearchStack = createNativeStackNavigator();
@@ -29,20 +30,6 @@ export function HomeScreen() {
           presentation: "modal",
         }}
       />
-    </HomeStack.Navigator>
-  );
-}
-
-export function SearchBarScreen() {
-  return (
-    <SearchStack.Navigator initialRouteName="Search">
-      <SearchStack.Screen
-        name="Search"
-        component={SearchScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
       <SearchStack.Screen
         name="PlayList"
         component={PlayListScreen}
@@ -60,6 +47,27 @@ export function SearchBarScreen() {
       <SearchStack.Screen
         name="Album"
         component={AlbumScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <SearchStack.Screen
+        name="Artist"
+        component={ArtistDetailScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </HomeStack.Navigator>
+  );
+}
+
+export function SearchBarScreen() {
+  return (
+    <SearchStack.Navigator initialRouteName="Search">
+      <SearchStack.Screen
+        name="Search"
+        component={SearchScreen}
         options={{
           headerShown: false,
         }}

@@ -26,6 +26,10 @@
 
 - Add tabs for navigation and album detail screen. Update UI style.
 
+###v.0.1.0
+
+- add search functionality and its components
+
 ##TODOS
 
 - implement a functionality that don't change the state of the Song screen if user tap on the same song

@@ -14,7 +14,7 @@ const IndexPlaylistItem = ({ item }) => {
     return (
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate("SearchTab", {
+          navigation.navigate("HomeTab", {
             screen: "PlayList",
             params: { uri: item.data.uri },
           })
