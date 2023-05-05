@@ -8,7 +8,7 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/Spotify-splash.png",
-      "resizeMode": "stretch",
+      "resizeMode": "cover",
       "backgroundColor": "#25e86b"
     },
     "assetBundlePatterns": ["**/*"],
