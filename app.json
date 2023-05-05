@@ -23,7 +23,7 @@
       "package": "com.emhosseinm.jukify"
     },
     "web": {
-      "favicon": "./assets/favicon.ico",
+      "favicon": "./assets/favicon.png",
       "build": {
         "babel": {
           "include": ["@babel/plugin-transform-flow-strip-types"]

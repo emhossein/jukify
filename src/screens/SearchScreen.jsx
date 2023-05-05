@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-
-import { View, SafeAreaView, TextInput } from "react-native";
+import { View, SafeAreaView, TextInput, Platform } from "react-native";
 
 import SearchIcon from "./../components/icons/SearchIcon";
 import Typography from "./../components/Typography";
@@ -10,9 +9,12 @@ import { searchSpotify } from "../store/searchSlice";
 import { RAPIDAPI_KEY } from "@env";
 import BigList from "react-native-big-list";
 import SearchIndex from "../components/Search/SearchIndex";
+import useScreenDimensions from "../hooks/useDimension";
 
 const SearchScreen = () => {
   const { search, searched, debouncedSearch } = useDebouncedSearch(500);
+  const { width, height } = useScreenDimensions();
+  const android = Platform.OS === "android";
 
   const dispatch = useDispatch();
   const { data, status } = useSelector((state) => state.searchData);
@@ -28,7 +30,10 @@ const SearchScreen = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-main items-center">
+    <SafeAreaView
+      style={{ paddingTop: android ? 25 : 0 }}
+      className="flex-1 bg-main items-center"
+    >
       <View className="flex-row items-center bg-accent w-[80%] mb-2 px-2 py-1 rounded-def">
         <SearchIcon iconColor="#A7A7A7" />
         <TextInput
@@ -42,6 +47,8 @@ const SearchScreen = () => {
       </View>
       {status === "succeeded" ? (
         <BigList
+          scrollEnabled={false}
+          itemHeight={height}
           showsVerticalScrollIndicator={false}
           data={[data]}
           renderItem={({ item }) => <SearchIndex item={item} />}

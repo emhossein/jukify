@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { View, Image, TouchableOpacity } from "react-native";
 
@@ -15,6 +15,8 @@ import BigList from "react-native-big-list";
 const PlayListScreen = ({ route, navigation }) => {
   const { uri } = route.params;
   const { width, height } = useScreenDimensions();
+
+  const [headerHeight, setHeaderHeight] = useState(0);
 
   const dispatch = useDispatch();
   const { playlistDetails, status } = useSelector((state) => state.playlist);
@@ -39,6 +41,13 @@ const PlayListScreen = ({ route, navigation }) => {
   const handleBackButton = () => {
     navigation.goBack();
     // navigation.push("Search");
+  };
+
+  console.log(headerHeight);
+
+  const handleHeaderLayout = (event) => {
+    const { height } = event.nativeEvent.layout;
+    setHeaderHeight(height);
   };
 
   return (
@@ -66,11 +75,36 @@ const PlayListScreen = ({ route, navigation }) => {
               <MoreIcon />
             </TouchableOpacity>
           </View>
-
+          {/* to get content height for headerHeight */}
+          <View
+            onLayout={handleHeaderLayout}
+            className="absolute opacity-0 -z-10 w-full items-center"
+          >
+            <View className="items-center" style={{ width: width * 0.8 }}>
+              <Typography bold styles="text-white text-xl mt-3">
+                {item?.name}
+              </Typography>
+              <Typography styles="text-white-light text-[13px] mt-[6px]">
+                {item?.tracks.items.length} Track
+              </Typography>
+              <Typography
+                numberOfLines={3}
+                styles="text-center text-white-light text-xs mt-[10px]"
+              >
+                {item?.description.replace(/<\/?[^>]+(>|$)/g, "")}
+              </Typography>
+            </View>
+            <View style={{ width: width * 0.8 }}>
+              <Typography bold styles="text-white text-base mt-3 mb-4">
+                Songs
+              </Typography>
+            </View>
+          </View>
+          {/* /////////////////////////////////////// */}
           <BigList
             getItemLayout={getItemLayout}
             showsVerticalScrollIndicator={false}
-            headerHeight={250}
+            headerHeight={headerHeight}
             renderHeader={() => (
               <View className="w-full items-center">
                 <View className="items-center" style={{ width: width * 0.8 }}>

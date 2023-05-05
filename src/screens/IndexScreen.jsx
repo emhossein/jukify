@@ -1,6 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FlatList, View, SafeAreaView, ScrollView, Image } from "react-native";
+import {
+  FlatList,
+  View,
+  SafeAreaView,
+  ScrollView,
+  Image,
+  Platform,
+} from "react-native";
 
 import { fetchTTH } from "../store/tthSlice";
 import Typography from "../components/Typography";
@@ -20,6 +27,8 @@ import Artist from "../components/Artist/Artist";
 
 const IndexScreen = () => {
   const { width } = useScreenDimensions();
+
+  const android = Platform.OS === "android";
 
   const dispatch = useDispatch();
   const { data: tth, status: tthStatus } = useSelector((state) => state.tth);
@@ -47,7 +56,10 @@ const IndexScreen = () => {
   }, []);
 
   return (
-    <SafeAreaView className="bg-main flex-1">
+    <SafeAreaView
+      style={{ paddingTop: android ? 25 : 0 }}
+      className="bg-main flex-1"
+    >
       <SafeAreaView className="items-center mb-4">
         <Image
           source={require("../../assets/Spotify-logo-dark.png")}
