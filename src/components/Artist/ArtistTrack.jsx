@@ -46,8 +46,8 @@ const ArtistTrack = ({ item, name }) => {
         <TouchableOpacity
           onPress={() =>
             handlePlayTrack({
-              artist: item.track.name,
-              track: name,
+              artist: name,
+              track: item.track.name,
             })
           }
         >
@@ -56,7 +56,7 @@ const ArtistTrack = ({ item, name }) => {
             className="items-center justify-center w-10 h-10 rounded-full bg-accent mr-4 "
             imageStyle={{ borderRadius: 1000, opacity: 0.4 }}
           >
-            {isPlaying && title === name ? (
+            {isPlaying && title === item.track.name ? (
               <PauseIcon width="10" height="24" />
             ) : (
               <PlayIcon width="20" height="20" />
