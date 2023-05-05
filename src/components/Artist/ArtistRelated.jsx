@@ -17,7 +17,7 @@ const ArtistRelated = ({ item }) => {
         source={{ uri: item?.visuals.avatarImage.sources[0].url }}
         style={{
           width: width * 0.36,
-          height: height * 0.2025,
+          height: width * 0.36,
         }}
         className="mr-[14px] rounded-full"
       />

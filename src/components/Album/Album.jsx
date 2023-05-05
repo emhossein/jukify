@@ -21,7 +21,7 @@ const NewAlbum = ({ item }) => {
         source={{ uri: item.images[0].url }}
         style={{
           width: width * 0.36,
-          height: height * 0.2025,
+          height: width * 0.36,
           borderRadius: 8,
           marginRight: 14,
         }}

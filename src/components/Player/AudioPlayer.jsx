@@ -120,7 +120,7 @@ const AudioPlayer = ({ details }) => {
       <View>
         <Image
           source={{ uri: musicImage }}
-          style={{ width: width * 0.8, height: height * 0.44 }}
+          style={{ width: width * 0.8, height: width * 0.8 }}
           className="rounded-[30px] self-center"
         />
         <View className="mt-[17px] mb-4 flex-row items-center justify-between">
@@ -154,7 +154,7 @@ const AudioPlayer = ({ details }) => {
         <View className="flex-row items-center justify-center">
           <TouchableOpacity onPress={handlePlayPause}>
             <View
-              style={{ width: width * 0.18, height: height * 0.1 }}
+              style={{ width: width * 0.18, height: width * 0.18 }}
               className="rounded-full bg-spotify items-center justify-center"
             >
               {isPlaying ? (

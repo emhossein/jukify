@@ -91,8 +91,8 @@ const IndexScreen = () => {
               renderItem={({ item }) => <NewAlbum item={item} />}
             />
             <PlayList title="Fresh New Musics" data={data.freshNewMusic} />
-            {/* <PlayList title="Sing Along" data={data.singAlong} />
-            <PlayList title="Happy" data={data.happy} /> */}
+            <PlayList title="Sing Along" data={data.singAlong} />
+            <PlayList title="Happy" data={data.happy} />
             <Typography styles="text-white text-base mb-3 mt-5">
               Popular Artists
             </Typography>

@@ -41,7 +41,7 @@ const TodayHits = ({ item }) => {
           source={{ uri: item.track.album.images[0].url }}
           style={{
             width: width * 0.3,
-            height: height * 0.22,
+            height: width * 0.3,
             borderRadius: 30,
           }}
         />
