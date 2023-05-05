@@ -1,37 +1,89 @@
-###v.0.0.0
+# Jukify - React Native Music Player App
 
-- Initial Setup
+This is a music player app built using React Native. The app allows users to search and play songs, view album details, and fetch song lyrics.
 
-###v.0.0.1
+## Features
 
-- Setup Audio Player
+- Search and play songs
+- View album details
+- Fetch song lyrics
+- Looping mechanism for songs
+- Ability to play songs in playlist screen
+- Tabs for navigation
 
-###v.0.0.2
+## Changelog
 
-- Implement with redux
+### v.0.1.0
 
-###v.0.0.3
+- Add search functionality and its components
 
-- Change from spotify scrapper to [soundcloud-downloader](https://rapidapi.com/TTKTrungKien/api/soundcloud-downloader4/)
+### v.0.0.6
 
-###v.0.0.4
+- Add tabs for navigation and album detail screen
+- Update UI style
 
-- Add lyrics fetching and screen for iOS and enable song looping mechanism
-
-###v.0.0.5
+### v.0.0.5
 
 - Add ability to play songs in playlist screen
 
-###v.0.0.6
+### v.0.0.4
 
-- Add tabs for navigation and album detail screen. Update UI style.
+- Add lyrics fetching and screen for iOS
+- Enable song looping mechanism
 
-###v.0.1.0
+### v.0.0.3
 
-- add search functionality and its components
+- Change from Spotify scrapper to [soundcloud-downloader](https://rapidapi.com/TTKTrungKien/api/soundcloud-downloader4/)
 
-##TODOS
+### v.0.0.2
 
-- implement a functionality that don't change the state of the Song screen if user tap on the same song
-- open song screen from bottom to top in android
-- Try to work with [spotify-web-api-js](https://github.com/JMPerez/spotify-web-api-js)
+- Implement with redux
+
+### v.0.0.1
+
+- Setup audio player
+
+### v.0.0.0
+
+- Initial setup
+
+## How to Use
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/en/)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)
+
+### Installation
+
+1. Clone the repository:
+
+   ```
+   git clone https://github.com/your-username/jukify.git
+   ```
+
+2. Change directory:
+
+   ```
+   cd jukify
+   ```
+
+3. Install dependencies:
+
+   ```
+   npm install
+   ```
+
+### Usage
+
+1. Start the development server:
+
+   ```
+   expo start
+   ```
+
+2. Follow the instructions in the terminal to open the app in your preferred environment, such as an iOS or Android simulator or your own device.
+
+## License
+
+This project is licensed under the [MIT License](https://github.com/your-username/jukify/blob/main/LICENSE).
