@@ -5,7 +5,7 @@ export const fetchLyrics = createAsyncThunk(
   "lyrics/fetchLyrics",
   async ({ artist, title }) => {
     const response = await axios.get(
-      `https://some-random-api.ml/lyrics?title=${artist + " _ " + title}`
+      `https://some-random-api.com/lyrics?title=${artist + " _ " + title}`
     );
 
     console.log(`fetching lyrics: ${artist + " _ " + title}`);

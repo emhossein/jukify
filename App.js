@@ -9,10 +9,13 @@ import HomeIcon from "./src/components/icons/HomeIcon";
 import SearchIcon from "./src/components/icons/SearchIcon";
 import StickyPlayer from "./src/components/Player/StickyPlayer";
 import { HomeScreen, SearchBarScreen } from "./src/screens/Index";
+import { LogBox } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  LogBox.ignoreAllLogs();
+
   return (
     <Provider store={store}>
       <NavigationContainer>
