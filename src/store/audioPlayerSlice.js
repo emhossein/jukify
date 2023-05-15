@@ -100,7 +100,9 @@ export const loadSound = (url) => async (dispatch, getState) => {
         }
       }
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const playPause = () => async (dispatch, getState) => {

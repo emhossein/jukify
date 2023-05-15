@@ -15,12 +15,12 @@ export const fetchIndexPlayList = createAsyncThunk(
   "indexPlaylist/fetchIndexPlayList",
   async ({ apiKey }) => {
     const headers = {
-      "X-RapidAPI-Host": "spotify23.p.rapidapi.com",
+      "X-RapidAPI-Host": "spotify81.p.rapidapi.com",
       "X-RapidAPI-Key": apiKey,
     };
 
     const freshNewMusicResponse = await axios.get(
-      "https://spotify23.p.rapidapi.com/search/?q=fresh%20new%20music&type=playlists&limit=20",
+      "https://spotify81.p.rapidapi.com/search/?q=fresh%20new%20music&type=playlists&limit=20",
       { headers }
     );
     const freshNewMusicData = freshNewMusicResponse.data.playlists.items.filter(
@@ -28,7 +28,7 @@ export const fetchIndexPlayList = createAsyncThunk(
     );
 
     const singAlongResponse = await axios.get(
-      "https://spotify23.p.rapidapi.com/search/?q=sing%20along&type=playlists&limit=20",
+      "https://spotify81.p.rapidapi.com/search/?q=sing%20along&type=playlists&limit=20",
       { headers }
     );
     const singAlongData = singAlongResponse.data.playlists.items.filter(
@@ -36,7 +36,7 @@ export const fetchIndexPlayList = createAsyncThunk(
     );
 
     const happyResponse = await axios.get(
-      "https://spotify23.p.rapidapi.com/search/?q=happy&type=playlists&limit=20",
+      "https://spotify81.p.rapidapi.com/search/?q=happy&type=playlists&limit=20",
       { headers }
     );
     const happyData = happyResponse.data.playlists.items.filter(

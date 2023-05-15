@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Text, SafeAreaView } from "react-native";
 import AudioPlayer from "../components/Player/AudioPlayer";
 
 import { RAPIDAPI_KEY, ONE_TOKEN } from "@env";
@@ -7,14 +6,20 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { downloadSong } from "../store/songDownload";
 import { selectAudioPlayer } from "../store/audioPlayerSlice";
-import { hide, show, toggle } from "../store/showSlice";
 import Typography from "../components/Typography";
+import { fetchDominantColors } from "../store/dominantColorSlice";
+import { LinearGradient } from "expo-linear-gradient";
 
 const SongScreen = () => {
   const dispatch = useDispatch();
 
-  const { artist, title } = useSelector(selectAudioPlayer);
+  const { artist, title, musicImage } = useSelector(selectAudioPlayer);
   const { data, status } = useSelector((state) => state.download);
+  const { data: colors } = useSelector((state) => state.dominantColors);
+
+  useEffect(() => {
+    dispatch(fetchDominantColors({ url: musicImage }));
+  }, [musicImage]);
 
   useEffect(() => {
     dispatch(
@@ -28,13 +33,17 @@ const SongScreen = () => {
   }, [title]);
 
   return (
-    <SafeAreaView className="items-center justify-center flex-1 bg-main">
+    <LinearGradient
+      colors={[colors?.vibrant, "#1C1B1B"]}
+      end={{ x: 0.5, y: 0.8 }}
+      className="flex-1 items-center justify-center"
+    >
       {status === "succeeded" ? (
         <AudioPlayer details={data?.result} />
       ) : (
         <Typography styles="text-white">Loading...</Typography>
       )}
-    </SafeAreaView>
+    </LinearGradient>
   );
 };
 

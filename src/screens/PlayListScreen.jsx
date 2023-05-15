@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { View, Image, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
+import { Image } from "expo-image";
 
 import { ONE_TOKEN } from "@env";
 
@@ -11,6 +12,8 @@ import useScreenDimensions from "../hooks/useDimension";
 import PlayListTrack from "../components/Index/PlayLists/PlayListTrack";
 import { fetchPlaylistDetails } from "../store/playlistDetailSlice";
 import BigList from "react-native-big-list";
+import { fetchDominantColors } from "../store/dominantColorSlice";
+import { LinearGradient } from "expo-linear-gradient";
 
 const PlayListScreen = ({ route, navigation }) => {
   const { uri } = route.params;
@@ -20,6 +23,8 @@ const PlayListScreen = ({ route, navigation }) => {
 
   const dispatch = useDispatch();
   const { playlistDetails, status } = useSelector((state) => state.playlist);
+  const { data: colors } = useSelector((state) => state.dominantColors);
+  const { shown } = useSelector((state) => state.show);
 
   const item = playlistDetails?.result;
 
@@ -28,22 +33,33 @@ const PlayListScreen = ({ route, navigation }) => {
   };
 
   useEffect(() => {
-    // if (!playlistDetails) {
-    dispatch(
-      fetchPlaylistDetails({
-        oneKey: ONE_TOKEN,
-        playlistId: uri.split(":")[2],
-      })
-    );
-    // }
+    // eslint-disable-next-line no-undef
+    if (__DEV__) {
+      if (!playlistDetails) {
+        dispatch(
+          fetchPlaylistDetails({
+            oneKey: ONE_TOKEN,
+            playlistId: uri.split(":")[2],
+          })
+        );
+      }
+    } else {
+      dispatch(
+        fetchPlaylistDetails({
+          oneKey: ONE_TOKEN,
+          playlistId: uri.split(":")[2],
+        })
+      );
+    }
   }, []);
+
+  useEffect(() => {
+    dispatch(fetchDominantColors({ url: item?.images[0].url }));
+  }, [item?.images[0].url]);
 
   const handleBackButton = () => {
     navigation.goBack();
-    // navigation.push("Search");
   };
-
-  console.log(headerHeight);
 
   const handleHeaderLayout = (event) => {
     const { height } = event.nativeEvent.layout;
@@ -51,13 +67,21 @@ const PlayListScreen = ({ route, navigation }) => {
   };
 
   return (
-    <View className="bg-main flex-1">
+    <LinearGradient
+      colors={[colors?.vibrant, "#1C1B1B"]}
+      end={{ x: 0.5, y: 0.8 }}
+      className="flex-1"
+    >
       {status === "succeeded" && (
-        <View className="relative flex-1 items-center bg-main">
+        <View
+          style={{ marginBottom: !shown ? 65 : 0 }}
+          className="relative flex-1 items-center"
+        >
           <Image
-            source={{ uri: item?.images[0].url }}
+            source={item?.images[0].url}
             style={{ width: "100%", height: height * 0.3516 }}
             className="rounded-b-[69px]"
+            priority="high"
           />
           <View
             style={{ width: width * 0.8 }}
@@ -134,7 +158,7 @@ const PlayListScreen = ({ route, navigation }) => {
           />
         </View>
       )}
-    </View>
+    </LinearGradient>
   );
 };
 

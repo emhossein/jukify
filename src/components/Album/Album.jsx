@@ -1,11 +1,11 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
+import { Image, TouchableOpacity } from "react-native";
 import useScreenDimensions from "../../hooks/useDimension";
 import Typography from "../Typography";
 import { useNavigation } from "@react-navigation/native";
 
 const NewAlbum = ({ item }) => {
-  const { width, height } = useScreenDimensions();
+  const { width } = useScreenDimensions();
   const navigation = useNavigation();
 
   return (

@@ -1,11 +1,12 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
-import React from "react";
-import useScreenDimensions from "../../hooks/useDimension";
-import Typography from "../Typography";
+import { TouchableOpacity } from "react-native";
+import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
 
+import useScreenDimensions from "../../hooks/useDimension";
+import Typography from "../Typography";
+
 const ArtistAlbum = ({ item }) => {
-  const { width, height } = useScreenDimensions();
+  const { width } = useScreenDimensions();
   const navigation = useNavigation();
 
   return (
@@ -18,7 +19,7 @@ const ArtistAlbum = ({ item }) => {
       }
     >
       <Image
-        source={{ uri: item.releases.items[0].coverArt.sources[0].url }}
+        source={item.releases.items[0].coverArt.sources[0].url}
         style={{
           width: width * 0.36,
           height: width * 0.36,

@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import tthReducer from "./tthSlice";
+import userReducer from "./userSlice";
 import showReducer from "./showSlice";
 import dlReducer from "./songDownload";
 import searchReducer from "./searchSlice";
@@ -12,6 +13,7 @@ import audioPlayerReducer from "./audioPlayerSlice";
 import artistDetailReducer from "./artistDetailSlice";
 import albumDetailsReducer from "./albumDetailsSlice";
 import indexPlaylistReducer from "./indexPlaylistSlice";
+import dominantColorsReducer from "./dominantColorSlice";
 
 const store = configureStore({
   reducer: {
@@ -27,6 +29,8 @@ const store = configureStore({
     topArtists: topArtistsReducer,
     artistDetail: artistDetailReducer,
     searchData: searchReducer,
+    dominantColors: dominantColorsReducer,
+    user: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

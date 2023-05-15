@@ -1,3 +1,4 @@
+import React from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -5,7 +6,7 @@ import Typography from "../Typography";
 import PlayIcon from "../icons/PlayIcon";
 import PauseIcon from "../icons/PauseIcon";
 import { playPause, selectAudioPlayer } from "../../store/audioPlayerSlice";
-import { show, toggle } from "../../store/showSlice";
+import { toggle } from "../../store/showSlice";
 
 const StickyPlayer = () => {
   const { artist, title, musicImage, isPlaying } =

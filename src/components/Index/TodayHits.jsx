@@ -1,5 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
 import { View, Image, TouchableOpacity } from "react-native";
 
 import Typography from "../Typography";
@@ -10,13 +9,10 @@ import {
   setMusicImage,
   setTitle,
 } from "../../store/audioPlayerSlice";
-import { show, toggle } from "../../store/showSlice";
-
-import { RAPIDAPI_KEY, ONE_TOKEN } from "@env";
+import { toggle } from "../../store/showSlice";
 
 const TodayHits = ({ item }) => {
-  const navigation = useNavigation();
-  const { width, height } = useScreenDimensions();
+  const { width } = useScreenDimensions();
 
   const dispatch = useDispatch();
 

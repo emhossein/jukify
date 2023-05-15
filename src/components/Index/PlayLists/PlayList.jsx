@@ -2,11 +2,8 @@ import { FlatList, View } from "react-native";
 
 import Typography from "../../Typography";
 import IndexPlaylistItem from "./IndexPlaylistItem";
-import useScreenDimensions from "../../../hooks/useDimension";
 
 const PlayList = ({ title, data }) => {
-  const { width } = useScreenDimensions();
-
   return (
     <View style={{ marginTop: 20 }}>
       <Typography styles="text-white text-base mb-3">{title}</Typography>

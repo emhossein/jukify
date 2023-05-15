@@ -1,7 +1,7 @@
 import Slider from "@react-native-community/slider";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useCallback } from "react";
 import {
   View,
   TouchableOpacity,
@@ -29,7 +29,7 @@ import formatDuration from "../../utils/formatDuration";
 
 const AudioPlayer = ({ details }) => {
   const navigation = useNavigation();
-  const { width, height } = useScreenDimensions();
+  const { width } = useScreenDimensions();
 
   const dispatch = useDispatch();
 
@@ -51,7 +51,6 @@ const AudioPlayer = ({ details }) => {
 
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", handleBackButton);
-
     return () =>
       BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
   }, []);

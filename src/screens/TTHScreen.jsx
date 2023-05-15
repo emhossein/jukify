@@ -1,12 +1,10 @@
-import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
-import React from "react";
-import { useEffect } from "react";
+import { View, Image, TouchableOpacity } from "react-native";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTTH } from "../store/tthSlice";
 import { ONE_TOKEN } from "@env";
 import useScreenDimensions from "../hooks/useDimension";
 import Typography from "../components/Typography";
-import TodayHits from "../components/Index/TodayHits";
 import PlayListTrack from "../components/Index/PlayLists/PlayListTrack";
 import BigList from "react-native-big-list";
 import BackIcon from "../components/icons/BackIcon";
@@ -16,12 +14,12 @@ const TTHScreen = ({ navigation }) => {
   const { width, height } = useScreenDimensions();
 
   const dispatch = useDispatch();
-  const { data: tth, status: tthStatus } = useSelector((state) => state.tth);
+  const { data: tth } = useSelector((state) => state.tth);
 
   useEffect(() => {
-    // if (!tth) {
-    dispatch(fetchTTH(ONE_TOKEN));
-    // }
+    if (!tth) {
+      dispatch(fetchTTH(ONE_TOKEN));
+    }
   }, []);
 
   const getItemLayout = (data, index) => {

@@ -1,7 +1,8 @@
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import React from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import { Image } from "expo-image";
 
 import useScreenDimensions from "../../hooks/useDimension";
-import Typography from "../Typography";
 import { useNavigation } from "@react-navigation/native";
 
 const TodayHitsButton = ({ images }) => {
@@ -17,7 +18,8 @@ const TodayHitsButton = ({ images }) => {
       {images?.map((image) => (
         <Image
           key={image}
-          source={{ uri: image }}
+          source={image}
+          priority="high"
           className="w-[33.5%] h-full"
         />
       ))}

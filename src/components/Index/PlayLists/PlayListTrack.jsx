@@ -1,7 +1,5 @@
-import axios from "axios";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
+import { View, ImageBackground, TouchableOpacity } from "react-native";
 
 import { RAPIDAPI_KEY, ONE_TOKEN } from "@env";
 
@@ -10,7 +8,6 @@ import Typography from "../../Typography";
 import PlayIcon from "../../icons/PlayIcon";
 import formatDuration from "../../../utils/formatDuration";
 import {
-  loadSound,
   selectAudioPlayer,
   setArtist,
   setMusicImage,
@@ -24,7 +21,6 @@ const PlayListTrack = ({ item }) => {
   const { width } = useScreenDimensions();
 
   const dispatch = useDispatch();
-  const { data, status } = useSelector((state) => state.download);
   const { title, isPlaying } = useSelector(selectAudioPlayer);
 
   const handlePlayTrack = async ({ artist, track }) => {

@@ -1,10 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Dimensions } from "react-native";
 
 const useScreenDimensions = () => {
-  const [screenDimensions, setScreenDimensions] = useState(
-    Dimensions.get("window") || {}
-  );
+  const [screenDimensions] = useState(Dimensions.get("window") || {});
 
   return screenDimensions;
 };

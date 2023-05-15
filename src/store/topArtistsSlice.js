@@ -11,10 +11,10 @@ export const fetchTopArtists = createAsyncThunk(
   "topArtists/fetchTopArtists",
   async ({ apiKey }) => {
     const response = await axios.get(
-      `https://spotify23.p.rapidapi.com/artists/`,
+      `https://spotify81.p.rapidapi.com/artists/`,
       {
         headers: {
-          "X-RapidAPI-Host": "spotify23.p.rapidapi.com",
+          "X-RapidAPI-Host": "spotify81.p.rapidapi.com",
           "X-RapidAPI-Key": apiKey,
         },
         params: {

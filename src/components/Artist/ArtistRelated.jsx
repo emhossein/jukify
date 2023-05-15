@@ -1,11 +1,11 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 import React from "react";
 import useScreenDimensions from "../../hooks/useDimension";
 import { useNavigation } from "@react-navigation/native";
 import Typography from "../Typography";
 
 const ArtistRelated = ({ item }) => {
-  const { width, height } = useScreenDimensions();
+  const { width } = useScreenDimensions();
   const navigation = useNavigation();
 
   return (

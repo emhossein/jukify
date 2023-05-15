@@ -1,35 +1,41 @@
-import { useEffect } from "react";
-import {
-  FlatList,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { RAPIDAPI_KEY } from "@env";
+
+import React, { useEffect } from "react";
+import { FlatList, ScrollView, TouchableOpacity, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import { Image } from "expo-image";
 
 import useScreenDimensions from "../hooks/useDimension";
 import { fetchArtistDetail } from "../store/artistDetailSlice";
 
-import { RAPIDAPI_KEY } from "@env";
 import Typography from "../components/Typography";
 import BackIcon from "../components/icons/BackIcon";
 import MoreIcon from "../components/icons/MoreIcon";
 import ArtistAlbum from "../components/Album/ArtistAlbum";
 import ArtistTrack from "../components/Artist/ArtistTrack";
 import ArtistRelated from "../components/Artist/ArtistRelated";
+import { fetchDominantColors } from "../store/dominantColorSlice";
+import { LinearGradient } from "expo-linear-gradient";
 
 const ArtistDetailScreen = ({ route, navigation }) => {
   const { id } = route.params;
   const { width, height } = useScreenDimensions();
   const dispatch = useDispatch();
   const { data, status } = useSelector((state) => state.artistDetail);
+  const { data: colors } = useSelector((state) => state.dominantColors);
+  const { shown } = useSelector((state) => state.show);
 
   const artist = data?.data?.artist;
 
   useEffect(() => {
     dispatch(fetchArtistDetail({ id: id, apiKey: RAPIDAPI_KEY }));
   }, [id]);
+
+  useEffect(() => {
+    dispatch(
+      fetchDominantColors({ url: artist?.visuals?.headerImage?.sources[0].url })
+    );
+  }, [artist?.visuals?.headerImage?.sources[0].url]);
 
   const handleBackButton = () => {
     navigation.goBack();
@@ -45,11 +51,16 @@ const ArtistDetailScreen = ({ route, navigation }) => {
         </View>
       )}
       {status === "succeeded" && (
-        <View className="bg-main relative flex-1 items-center">
+        <LinearGradient
+          colors={[colors?.vibrant, "#1C1B1B"]}
+          end={{ x: 0.5, y: 0.8 }}
+          className="relative flex-1 items-center"
+        >
           <Image
-            source={{ uri: artist?.visuals?.headerImage?.sources[0].url }}
+            source={artist?.visuals?.headerImage?.sources[0].url}
             style={{ width: "100%", height: height * 0.3516 }}
             className="rounded-b-[69px]"
+            priority="high"
           />
           <View
             style={{ width: width * 0.8 }}
@@ -75,7 +86,7 @@ const ArtistDetailScreen = ({ route, navigation }) => {
               {artist?.discography?.albums?.totalCount} Album ,{" "}
               {artist?.discography?.singles?.totalCount} Track
             </Typography>
-            <View style={{ width: width * 0.8 }}>
+            <View style={{ width: width * 0.8, marginBottom: !shown ? 65 : 0 }}>
               <Typography bold styles="text-white text-base mt-[10px] mb-4">
                 Albums
               </Typography>
@@ -119,7 +130,7 @@ const ArtistDetailScreen = ({ route, navigation }) => {
               />
             </View>
           </ScrollView>
-        </View>
+        </LinearGradient>
       )}
     </>
   );

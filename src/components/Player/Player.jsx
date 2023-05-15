@@ -1,4 +1,5 @@
-import { View, TouchableWithoutFeedback } from "react-native";
+import React from "react";
+import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
 import { toggle } from "../../store/showSlice";

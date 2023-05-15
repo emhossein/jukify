@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { View, SafeAreaView, TextInput, Platform } from "react-native";
 
 import SearchIcon from "./../components/icons/SearchIcon";
@@ -13,21 +13,17 @@ import useScreenDimensions from "../hooks/useDimension";
 
 const SearchScreen = () => {
   const { search, searched, debouncedSearch } = useDebouncedSearch(500);
-  const { width, height } = useScreenDimensions();
+  const { height } = useScreenDimensions();
   const android = Platform.OS === "android";
 
   const dispatch = useDispatch();
   const { data, status } = useSelector((state) => state.searchData);
 
   useEffect(() => {
-    // if (!data && searched !== "") {
-    dispatch(searchSpotify({ apiKey: RAPIDAPI_KEY, term: searched }));
-    // }
+    if (!data && searched !== "") {
+      dispatch(searchSpotify({ apiKey: RAPIDAPI_KEY, term: searched }));
+    }
   }, [searched]);
-
-  const getItemLayout = (data, index) => {
-    return { length: 60, offset: 50 * index, index };
-  };
 
   return (
     <SafeAreaView

@@ -1,8 +1,8 @@
 import { Text, View } from "react-native";
 import * as Font from "expo-font";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
-const Typography = ({ children, numberOfLines, styles, bold }) => {
+const Typography = ({ children, numberOfLines, styles, bold, style }) => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
   const loadFonts = async () => {
@@ -24,7 +24,7 @@ const Typography = ({ children, numberOfLines, styles, bold }) => {
       {fontsLoaded && (
         <Text
           numberOfLines={numberOfLines}
-          style={{ fontFamily: bold ? "SatoshiBold" : "Satoshi" }}
+          style={[{ fontFamily: bold ? "SatoshiBold" : "Satoshi" }, style]}
           className={styles}
         >
           {children}

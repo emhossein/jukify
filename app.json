@@ -11,9 +11,12 @@
       "resizeMode": "cover",
       "backgroundColor": "#25e86b"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.emhosseinm.jukify"
     },
     "android": {
       "adaptiveIcon": {
@@ -26,7 +29,9 @@
       "favicon": "./assets/favicon.png",
       "build": {
         "babel": {
-          "include": ["@babel/plugin-transform-flow-strip-types"]
+          "include": [
+            "@babel/plugin-transform-flow-strip-types"
+          ]
         }
       }
     },

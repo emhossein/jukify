@@ -1,42 +1,26 @@
-import { useEffect } from "react";
-import {
-  View,
-  ScrollView,
-  ImageBackground,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import React, { useEffect } from "react";
+import { View, ScrollView, ImageBackground, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
 import Typography from "../components/Typography";
 import { fetchLyrics } from "../store/lyricsSlice";
 import useScreenDimensions from "../hooks/useDimension";
 import { selectAudioPlayer } from "../store/audioPlayerSlice";
-import MoreIcon from "../components/icons/MoreIcon";
-import BackIcon from "../components/icons/BackIcon";
+
 import LyricsHeader from "../components/Lyrics/LyricsHeader";
 
-const LyricsScreen = ({ route, navigation }) => {
+const LyricsScreen = ({ route }) => {
   const { artist, title } = route.params;
 
   const { width, height } = useScreenDimensions();
 
   const dispatch = useDispatch();
-  const { lyrics, status, error } = useSelector((state) => state.lyrics);
+  const { lyrics, status } = useSelector((state) => state.lyrics);
   const { musicImage } = useSelector(selectAudioPlayer);
 
   useEffect(() => {
     dispatch(fetchLyrics({ artist, title }));
   }, [title, artist, musicImage]);
-
-  if (error) {
-    console.log(error);
-  }
-
-  const handleBackButton = () => {
-    navigation.goBack();
-  };
 
   return (
     <ImageBackground source={{ uri: musicImage }} style={styles.background}>
@@ -64,7 +48,7 @@ const LyricsScreen = ({ route, navigation }) => {
         <View className="items-center justify-start flex-1">
           <LyricsHeader title={title} status={status} />
           <Typography bold styles="w-[85%] text-[#ffffff] text-xl leading-8">
-            Sorry I couldn't find that song's lyrics
+            Sorry I couldn&apos;t find that song&apos;s lyrics
           </Typography>
         </View>
       )}
