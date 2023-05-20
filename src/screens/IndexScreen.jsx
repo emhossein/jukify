@@ -1,7 +1,7 @@
-import React, { useEffect, useCallback } from "react";
-import jwt_decode from "jwt-decode";
-import { useDispatch, useSelector } from "react-redux";
-import { useFocusEffect } from "@react-navigation/native";
+import React, { useEffect, useCallback } from 'react'
+import jwt_decode from 'jwt-decode'
+import { useDispatch, useSelector } from 'react-redux'
+import { useFocusEffect } from '@react-navigation/native'
 import {
   FlatList,
   View,
@@ -10,83 +10,82 @@ import {
   Image,
   Platform,
   StyleSheet,
-} from "react-native";
-import { StackActions } from "@react-navigation/native";
+} from 'react-native'
+import { StackActions } from '@react-navigation/native'
 
-import { fetchTTH } from "../store/tthSlice";
-import Typography from "../components/Typography";
-import PlayList from "../components/Index/PlayLists/PlayList";
-import { fetchIndexPlayList } from "../store/indexPlaylistSlice";
+import { fetchTTH } from '../store/tthSlice'
+import Typography from '../components/Typography'
+import PlayList from '../components/Index/PlayLists/PlayList'
+import { fetchIndexPlayList } from '../store/indexPlaylistSlice'
 
-import { ONE_TOKEN, RAPIDAPI_KEY } from "@env";
-import TodayHitsButton from "../components/Index/TodayHitsButton";
-import { fetchNewAlbums } from "../store/newAlbumsSlice";
-import NewAlbum from "../components/Album/Album";
-import { fetchTopArtists } from "../store/topArtistsSlice";
-import Artist from "../components/Artist/Artist";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { deleteUser, setUser } from "../store/userSlice";
-import { Colors, Sizing, Utils } from "../styles";
-import stateOfDay from "../utils/stateOfDay";
+import { ONE_TOKEN, RAPIDAPI_KEY } from '@env'
+import TodayHitsButton from '../components/Index/TodayHitsButton'
+import { fetchNewAlbums } from '../store/newAlbumsSlice'
+import NewAlbum from '../components/Album/Album'
+import { fetchTopArtists } from '../store/topArtistsSlice'
+import Artist from '../components/Artist/Artist'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { deleteUser, setUser } from '../store/userSlice'
+import { Colors, Sizing, Utils } from '../styles'
+import stateOfDay from '../utils/stateOfDay'
 
 const IndexScreen = ({ navigation }) => {
-  const android = Platform.OS === "android";
+  const android = Platform.OS === 'android'
 
   const removeValue = async () => {
     try {
-      await AsyncStorage.removeItem("@token");
-      dispatch(deleteUser());
+      await AsyncStorage.removeItem('@token')
+      dispatch(deleteUser())
     } catch (e) {
-      console.log(e);
+      console.log(e)
     }
-    console.log("time expired");
-  };
+    console.log('time expired')
+  }
 
   const getData = async () => {
     try {
-      const value = await AsyncStorage.getItem("@token");
+      const value = await AsyncStorage.getItem('@token')
       if (value !== null) {
-        dispatch(setUser(jwt_decode(value)));
-        console.log("user logged in.");
+        dispatch(setUser(jwt_decode(value)))
+        console.log('user logged in.')
       } else {
-        navigation.dispatch(StackActions.replace("Auth"));
-        console.log("no token found, please login.");
+        navigation.dispatch(StackActions.replace('Auth'))
+        console.log('no token found, please login.')
       }
     } catch (e) {
-      console.log(e);
+      console.log(e)
     }
-  };
+  }
 
-  const dispatch = useDispatch();
-  const { data: tth, status: tthStatus } = useSelector((state) => state.tth);
-  const { data: newAlbums } = useSelector((state) => state.newAlbums);
-  const { data: artists } = useSelector((state) => state.topArtists);
-  const { data, status } = useSelector((state) => state.indexPlaylist);
-  const { shown } = useSelector((state) => state.show);
-  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch()
+  const { data: tth, status: tthStatus } = useSelector((state) => state.tth)
+  const { data: newAlbums } = useSelector((state) => state.newAlbums)
+  const { data: artists } = useSelector((state) => state.topArtists)
+  const { data, status } = useSelector((state) => state.indexPlaylist)
+  const { shown } = useSelector((state) => state.show)
+  const user = useSelector((state) => state.user)
 
   const tthButtonCover = tth?.result?.tracks?.items
     ?.slice(0, 3)
-    .map((item) => item.track.album.images[0].url);
+    .map((item) => item.track.album.images[0].url)
 
   useEffect(() => {
-    getData();
+    getData()
 
-    // eslint-disable-next-line no-undef
     // if (__DEV__) {
     //   if (!tth || !data || !newAlbums || !artists) {
-    //     dispatch(fetchTTH(ONE_TOKEN));
-    //     dispatch(fetchNewAlbums({ apiKey: RAPIDAPI_KEY }));
-    //     dispatch(fetchIndexPlayList({ apiKey: RAPIDAPI_KEY }));
-    //     dispatch(fetchTopArtists({ apiKey: RAPIDAPI_KEY }));
+    //     dispatch(fetchTTH(ONE_TOKEN))
+    //     dispatch(fetchNewAlbums({ apiKey: RAPIDAPI_KEY }))
+    //     dispatch(fetchIndexPlayList({ apiKey: RAPIDAPI_KEY }))
+    //     dispatch(fetchTopArtists({ apiKey: RAPIDAPI_KEY }))
     //   }
     // } else {
-    //   dispatch(fetchTTH(ONE_TOKEN));
-    //   dispatch(fetchNewAlbums({ apiKey: RAPIDAPI_KEY }));
-    //   dispatch(fetchIndexPlayList({ apiKey: RAPIDAPI_KEY }));
-    //   dispatch(fetchTopArtists({ apiKey: RAPIDAPI_KEY }));
+    //   dispatch(fetchTTH(ONE_TOKEN))
+    //   dispatch(fetchNewAlbums({ apiKey: RAPIDAPI_KEY }))
+    //   dispatch(fetchIndexPlayList({ apiKey: RAPIDAPI_KEY }))
+    //   dispatch(fetchTopArtists({ apiKey: RAPIDAPI_KEY }))
     // }
-  }, []);
+  }, [])
 
   // removeValue();
 
@@ -96,17 +95,17 @@ const IndexScreen = ({ navigation }) => {
         user !== null &&
         new Date().getTime() > new Date(user?.exp * 1000).getTime()
       ) {
-        removeValue();
-        navigation.dispatch(StackActions.replace("Auth"));
+        removeValue()
+        navigation.dispatch(StackActions.replace('Auth'))
       } else {
-        console.log(new Date(user?.exp * 1000).toLocaleString());
+        console.log(new Date(user?.exp * 1000).toLocaleString())
         console.log(
-          "expired? ",
-          new Date().getTime() > new Date(user?.exp * 1000).getTime()
-        );
+          'expired? ',
+          new Date().getTime() > new Date(user?.exp * 1000).getTime(),
+        )
       }
-    }, [])
-  );
+    }, []),
+  )
 
   return (
     <SafeAreaView
@@ -118,12 +117,12 @@ const IndexScreen = ({ navigation }) => {
           {stateOfDay()} {user?.name}!
         </Typography>
         <Image
-          source={require("../../assets/Spotify-logo-dark.png")}
+          source={require('../../assets/Spotify-logo-dark.png')}
           style={style.headerLogo}
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {tthStatus === "succeeded" && (
+        {tthStatus === 'succeeded' && (
           <View className="ml-[10%] mb-6">
             <Typography bold styles="text-white text-xl mb-3 ">
               Today&apos;s Top Hits
@@ -131,7 +130,7 @@ const IndexScreen = ({ navigation }) => {
             <TodayHitsButton images={tthButtonCover} />
           </View>
         )}
-        {status === "succeeded" && (
+        {status === 'succeeded' && (
           <View className="ml-[10%]" style={{ marginBottom: !shown ? 65 : 0 }}>
             <Typography bold styles="text-white text-base -mb-4">
               Recommended for you
@@ -167,17 +166,17 @@ const IndexScreen = ({ navigation }) => {
         )}
       </ScrollView>
     </SafeAreaView>
-  );
-};
+  )
+}
 
-export default IndexScreen;
+export default IndexScreen
 
 const style = StyleSheet.create({
   header: {
     width: Sizing.screenBase.width,
-    alignSelf: "center",
+    alignSelf: 'center',
     ...Utils.flexRow,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
   },
   headerLogo: {
     ...Sizing.logoSize,
@@ -186,4 +185,4 @@ const style = StyleSheet.create({
     color: Colors.neutral.white,
     fontSize: 19,
   },
-});
+})

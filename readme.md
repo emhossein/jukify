@@ -13,6 +13,8 @@ This is a music player app built using React Native. The app allows users to sea
 
 ## Changelog
 
+### v.0.1.5
+
 ### v.0.1.4
 
 - integrate with postgresql database for signin and singup and keep a history of listened songs
