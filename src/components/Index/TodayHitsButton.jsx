@@ -12,8 +12,8 @@ const TodayHitsButton = ({ images }) => {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("HomeTab", { screen: "TTHScreen" })}
-      style={{ width: width * 0.8, height: height * 0.25 }}
-      className="relative flex-row items-center bg-white self-center rounded-def overflow-hidden -ml-[10%]"
+      style={{ width: width * 0.9, height: height * 0.25 }}
+      className="relative flex-row items-center bg-white self-center rounded-def overflow-hidden -ml-[5%]"
     >
       {images?.map((image) => (
         <Image

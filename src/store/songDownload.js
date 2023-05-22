@@ -24,8 +24,6 @@ export const downloadSong = createAsyncThunk(
       `https://one-api.ir/soundcloud/?token=${oneKey}&action=download&link=${searchResponse.data.result[0].url}`
     );
 
-    console.log(`downloading ${track} by ${artist}`);
-
     return downloadResponse.data;
   }
 );

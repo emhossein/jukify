@@ -14,7 +14,6 @@ export const fetchAlbumDetails = createAsyncThunk(
       `https://one-api.ir/spotify/?token=${oneKey}&action=album&id=${id}`
     );
 
-    console.log("fetched album details");
     return response.data;
   }
 );

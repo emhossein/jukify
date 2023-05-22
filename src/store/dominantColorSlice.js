@@ -14,7 +14,6 @@ export const fetchDominantColors = createAsyncThunk(
       `https://jukify-back.vercel.app/api/colors?url=${url}`
     );
 
-    console.log("fetched colors");
     return response.data;
   }
 );

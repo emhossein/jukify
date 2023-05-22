@@ -12,6 +12,7 @@ const StickyPlayer = () => {
   const { artist, title, musicImage, isPlaying } =
     useSelector(selectAudioPlayer);
   const { shown } = useSelector((state) => state.show);
+  const { data: colors } = useSelector((state) => state.dominantColors);
   const dispatch = useDispatch();
 
   const handlePlayPause = () => {
@@ -23,7 +24,8 @@ const StickyPlayer = () => {
       {!shown && title && (
         <TouchableOpacity
           onPress={() => dispatch(toggle())}
-          className="absolute bottom-[57px] self-center flex-row items-center justify-between w-[97%] bg-accent p-2 py-3 rounded-lg"
+          className="absolute bottom-[70px] self-center flex-row items-center justify-between w-[90%] p-2 py-3 rounded-lg"
+          style={{ backgroundColor: colors.darkMuted }}
         >
           <View className="flex-row">
             <Image

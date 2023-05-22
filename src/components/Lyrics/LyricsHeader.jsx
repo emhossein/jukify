@@ -19,7 +19,7 @@ const LyricsHeader = ({ title, status }) => {
       className={`flex-row self-center items-center justify-between mb-10 ${
         status === "failed" && "mt-10"
       } `}
-      style={{ width: width * 0.8 }}
+      style={{ width: width * 0.9 }}
     >
       <TouchableOpacity
         onPress={handleBackButton}

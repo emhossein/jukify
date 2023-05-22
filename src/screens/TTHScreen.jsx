@@ -1,4 +1,5 @@
-import { View, Image, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
+import { Image } from "expo-image";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTTH } from "../store/tthSlice";
@@ -34,12 +35,12 @@ const TTHScreen = ({ navigation }) => {
   return (
     <View className="relative flex-1 items-center bg-main">
       <Image
-        source={{ uri: tth?.result.images[0].url }}
+        source={tth?.result.images[0].url}
         style={{ width: "100%", height: height * 0.3516 }}
-        className="rounded-b-[69px]"
+        className="rounded-b-[30px]"
       />
       <View
-        style={{ width: width * 0.8 }}
+        style={{ width: width * 0.9 }}
         className="absolute top-10 flex-row justify-between w-full mb-7"
       >
         <TouchableOpacity
@@ -60,7 +61,7 @@ const TTHScreen = ({ navigation }) => {
         headerHeight={120}
         renderHeader={() => (
           <View className="w-full items-center">
-            <View className="items-center" style={{ width: width * 0.8 }}>
+            <View className="items-center" style={{ width: width * 0.9 }}>
               <Typography bold styles="text-white text-xl mt-3">
                 {tth?.result.name}
               </Typography>
@@ -71,7 +72,7 @@ const TTHScreen = ({ navigation }) => {
                 {tth?.result.description.replace(/<\/?[^>]+(>|$)/g, "")}
               </Typography>
             </View>
-            <View style={{ width: width * 0.8 }}>
+            <View style={{ width: width * 0.9 }}>
               <Typography bold styles="text-white text-base mt-3">
                 Songs
               </Typography>

@@ -6,6 +6,7 @@ import showReducer from "./showSlice";
 import dlReducer from "./songDownload";
 import searchReducer from "./searchSlice";
 import lyricsReducer from "./lyricsSlice";
+import historyReducer from "./songHistorySlice";
 import newAlbumsReducer from "./newAlbumsSlice";
 import topArtistsReducer from "./topArtistsSlice";
 import playlistReducer from "./playlistDetailSlice";
@@ -31,6 +32,7 @@ const store = configureStore({
     searchData: searchReducer,
     dominantColors: dominantColorsReducer,
     user: userReducer,
+    history: historyReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

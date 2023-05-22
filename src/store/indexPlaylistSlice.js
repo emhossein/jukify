@@ -43,7 +43,6 @@ export const fetchIndexPlayList = createAsyncThunk(
       (item) => item.data.owner?.name === "Spotify"
     );
 
-    console.log("fetched indexPlaylist");
     return {
       freshNewMusic: freshNewMusicData,
       singAlong: singAlongData,

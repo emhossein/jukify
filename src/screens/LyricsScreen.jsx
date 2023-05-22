@@ -36,7 +36,7 @@ const LyricsScreen = ({ route }) => {
           <View className="items-center">
             <ScrollView
               showsVerticalScrollIndicator={false}
-              style={{ width: width * 0.8, height: height * 0.7 }}
+              style={{ width: width * 0.9, height: height * 0.7 }}
             >
               <Typography styles="text-[#ffffff] text-base leading-8">
                 {lyrics.lyrics}

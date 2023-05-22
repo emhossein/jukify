@@ -14,7 +14,6 @@ export const fetchPlaylistDetails = createAsyncThunk(
       `https://one-api.ir/spotify/?token=${oneKey}&action=playlists&id=${playlistId}`
     );
 
-    console.log("fetched playlist details");
     return response.data;
   }
 );

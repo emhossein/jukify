@@ -23,7 +23,6 @@ export const fetchArtistDetail = createAsyncThunk(
       }
     );
 
-    console.log("fetched artist details");
     return response.data;
   }
 );

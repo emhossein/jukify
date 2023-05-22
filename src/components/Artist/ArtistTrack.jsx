@@ -16,6 +16,7 @@ import {
 import PauseIcon from "./../icons/PauseIcon";
 import useScreenDimensions from "./../../hooks/useDimension";
 import { downloadSong } from "./../../store/songDownload";
+import { sendHistory } from "../../store/songHistorySlice";
 
 const ArtistTrack = ({ item, name }) => {
   const { width } = useScreenDimensions();
@@ -23,12 +24,20 @@ const ArtistTrack = ({ item, name }) => {
   const dispatch = useDispatch();
 
   const { title, isPlaying } = useSelector(selectAudioPlayer);
+  const { token } = useSelector((state) => state.user);
 
   const handlePlayTrack = async ({ artist, track }) => {
     dispatch(
       downloadSong({ artist, track, apiKey: RAPIDAPI_KEY, oneKey: ONE_TOKEN })
     );
-
+    dispatch(
+      sendHistory({
+        artist: artist,
+        song: track,
+        image: item.track.album.coverArt.sources[0].url,
+        token,
+      })
+    );
     dispatch(setArtist(artist));
     dispatch(setTitle(track));
     dispatch(setMusicImage(item.track.album.coverArt.sources[0].url));
@@ -38,7 +47,7 @@ const ArtistTrack = ({ item, name }) => {
     <View className="w-full items-center mb-1">
       <View
         className="flex-row items-center justify-between "
-        style={{ width: width * 0.8 }}
+        style={{ width: width * 0.9 }}
       >
         <TouchableOpacity
           onPress={() =>

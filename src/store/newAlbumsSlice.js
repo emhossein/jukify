@@ -25,7 +25,6 @@ export const fetchNewAlbums = createAsyncThunk(
       }
     );
 
-    console.log("fetched new albums");
     return response.data;
   }
 );

@@ -16,7 +16,7 @@ const SearchIndex = ({ item }) => {
 
   return (
     <>
-      <View className="ml-[10%] h-[118px]">
+      <View className="ml-[5%] h-[118px]">
         <Typography bold styles="text-white mb-1">
           Artists
         </Typography>
@@ -28,7 +28,7 @@ const SearchIndex = ({ item }) => {
           renderItem={({ item }) => <SearchedArtists item={item} />}
         />
       </View>
-      <View className="ml-[10%] mt-4 h-[122px]">
+      <View className="ml-[5%] mt-4 h-[122px]">
         <Typography bold styles="text-white mb-1">
           Albums
         </Typography>
@@ -40,7 +40,7 @@ const SearchIndex = ({ item }) => {
           renderItem={({ item }) => <SearchedAlbums item={item} />}
         />
       </View>
-      <View className="ml-[10%] h-[126px] mt-4">
+      <View className="ml-[5%] h-[126px] mt-4">
         <Typography bold styles="text-white mb-1">
           Playlists
         </Typography>
@@ -52,7 +52,7 @@ const SearchIndex = ({ item }) => {
           renderItem={({ item }) => <SearchedPlaylists item={item} />}
         />
       </View>
-      <View className="ml-[10%] h-52 mt-4">
+      <View className="ml-[5%] h-52 mt-4">
         <Typography bold styles="text-white mb-1">
           Tracks
         </Typography>

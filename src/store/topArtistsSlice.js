@@ -23,7 +23,6 @@ export const fetchTopArtists = createAsyncThunk(
       }
     );
 
-    console.log("fetched top artists");
     return response.data;
   }
 );

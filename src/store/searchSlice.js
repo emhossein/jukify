@@ -27,7 +27,6 @@ export const searchSpotify = createAsyncThunk(
       }
     );
 
-    console.log(`searched for ${term}`);
     return response.data;
   }
 );

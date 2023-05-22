@@ -13,7 +13,9 @@ This is a music player app built using React Native. The app allows users to sea
 
 ## Changelog
 
-### v.0.1.5
+### v.1.0.0
+
+- modify ui a little and final touches for communication with backend
 
 ### v.0.1.4
 

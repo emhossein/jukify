@@ -16,12 +16,14 @@ import {
 import PauseIcon from "../../icons/PauseIcon";
 import useScreenDimensions from "../../../hooks/useDimension";
 import { downloadSong } from "../../../store/songDownload";
+import { sendHistory } from "../../../store/songHistorySlice";
 
 const PlayListTrack = ({ item }) => {
   const { width } = useScreenDimensions();
 
   const dispatch = useDispatch();
   const { title, isPlaying } = useSelector(selectAudioPlayer);
+  const { token } = useSelector((state) => state.user);
 
   const handlePlayTrack = async ({ artist, track }) => {
     dispatch(
@@ -31,13 +33,21 @@ const PlayListTrack = ({ item }) => {
     dispatch(setArtist(artist));
     dispatch(setTitle(track));
     dispatch(setMusicImage(item.track.album.images[0].url));
+    dispatch(
+      sendHistory({
+        artist: artist,
+        song: track,
+        image: item.track.album.images[0].url,
+        token,
+      })
+    );
   };
 
   return (
     <View className="w-full items-center">
       <View
         className="flex-row items-center justify-between "
-        style={{ width: width * 0.8 }}
+        style={{ width: width * 0.9 }}
       >
         <TouchableOpacity
           onPress={() =>
