@@ -67,17 +67,21 @@ const AlbumScreen = ({ route, navigation }) => {
             renderHeader={() => (
               <View className="w-full items-center">
                 <View className="items-center" style={{ width: width * 0.9 }}>
-                  <Typography bold styles="text-white text-xl mt-3">
+                  <Typography size={20} bold styles="text-white text-xl mt-3">
                     {data?.result.name}
                   </Typography>
 
                   <Typography
+                    size={12}
                     numberOfLines={2}
                     styles="text-center text-white-light text-xs mt-[10px]"
                   >
                     {data?.result.artists[0].name}
                   </Typography>
-                  <Typography styles="text-white-light text-[10px] mt-[6px]">
+                  <Typography
+                    size={10}
+                    styles="text-white-light text-[10px] mt-[6px]"
+                  >
                     {data?.result.tracks.items.length} Track
                   </Typography>
                 </View>

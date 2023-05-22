@@ -53,7 +53,7 @@ const TodayHits = ({ item }) => {
         >
           {item.track.name}
         </Typography>
-        <Typography numberOfLines={1} styles="text-sm text-white">
+        <Typography size={14} numberOfLines={1} styles="text-sm text-white">
           {item.track.album.artists[0].name}
         </Typography>
       </View>

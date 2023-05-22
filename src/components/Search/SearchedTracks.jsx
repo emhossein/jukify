@@ -74,7 +74,7 @@ const SearchedTracks = ({ item }) => {
               ? item?.data.name.substring(0, 15) + "..."
               : item?.data.name}
           </Typography>
-          <Typography bold styles="text-white text-xs mt-1">
+          <Typography size={12} bold styles="text-white text-xs mt-1">
             {item?.data.artists.items[0].profile.name}
           </Typography>
         </View>

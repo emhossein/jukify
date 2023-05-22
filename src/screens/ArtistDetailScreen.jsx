@@ -66,10 +66,17 @@ const ArtistDetailScreen = ({ route, navigation }) => {
             </TouchableOpacity>
           </View>
           <ScrollView showsVerticalScrollIndicator={false}>
-            <Typography bold styles="text-center text-white text-xl mt-3">
+            <Typography
+              size={20}
+              bold
+              styles="text-center text-white text-xl mt-3"
+            >
               {artist?.profile?.name}
             </Typography>
-            <Typography styles="text-center text-white text-[13px] mt-[6px]">
+            <Typography
+              size={13}
+              styles="text-center text-white text-[13px] mt-[6px]"
+            >
               {artist?.discography?.albums?.totalCount} Album ,{" "}
               {artist?.discography?.singles?.totalCount} Track
             </Typography>

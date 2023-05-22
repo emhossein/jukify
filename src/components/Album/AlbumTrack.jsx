@@ -75,7 +75,7 @@ const AlbumTrack = ({ item, image }) => {
               ? item.name.substring(0, 15) + "..."
               : item.name}
           </Typography>
-          <Typography bold styles="text-white text-xs mt-1">
+          <Typography size={12} bold styles="text-white text-xs mt-1">
             {item.artists[0].name}
           </Typography>
         </View>

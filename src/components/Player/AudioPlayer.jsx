@@ -104,6 +104,7 @@ const AudioPlayer = ({ details }) => {
           <BackIcon />
         </TouchableOpacity>
         <Typography
+          size={18}
           bold
           styles="justify-self-center text-white font-bold mb-4 text-[18px]"
         >
@@ -124,7 +125,7 @@ const AudioPlayer = ({ details }) => {
         />
         <View className="mt-[17px] mb-4 flex-row items-center justify-between">
           <View>
-            <Typography bold styles="text-white text-xl ">
+            <Typography size={20} bold styles="text-white text-xl ">
               {title}
             </Typography>
             <Typography styles="text-white text-base">{artist}</Typography>
@@ -143,10 +144,10 @@ const AudioPlayer = ({ details }) => {
           style={{ width: width * 0.8 }}
         />
         <View className="flex-row items-center justify-between">
-          <Typography styles="text-[#878787] text-xs">
+          <Typography size={12} styles="text-[#878787] text-xs">
             {formatDuration(position)}
           </Typography>
-          <Typography styles="text-[#878787] text-xs">
+          <Typography size={12} styles="text-[#878787] text-xs">
             {formatDuration(duration)}
           </Typography>
         </View>
@@ -172,7 +173,9 @@ const AudioPlayer = ({ details }) => {
           className="items-center justify-center mt-8"
         >
           <UpIcon />
-          <Typography styles="text-white text-sm mt-1">Lyrics</Typography>
+          <Typography size={14} styles="text-white text-sm mt-1">
+            Lyrics
+          </Typography>
         </TouchableOpacity>
       )}
     </View>

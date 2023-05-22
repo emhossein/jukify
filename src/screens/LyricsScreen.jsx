@@ -28,7 +28,9 @@ const LyricsScreen = ({ route }) => {
 
       {status === "loading" ? (
         <View className="items-center">
-          <Typography styles="text-white text-lg">Loading...</Typography>
+          <Typography size={18} styles="text-white text-lg">
+            Loading...
+          </Typography>
         </View>
       ) : status === "succeeded" ? (
         <>
@@ -47,7 +49,11 @@ const LyricsScreen = ({ route }) => {
       ) : (
         <View className="items-center justify-start flex-1">
           <LyricsHeader title={title} status={status} />
-          <Typography bold styles="w-[85%] text-[#ffffff] text-xl leading-8">
+          <Typography
+            size={20}
+            bold
+            styles="w-[85%] text-[#ffffff] text-xl leading-8"
+          >
             Sorry I couldn&apos;t find that song&apos;s lyrics
           </Typography>
         </View>

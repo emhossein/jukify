@@ -103,7 +103,7 @@ const IndexScreen = ({ navigation }) => {
       className="bg-main flex-1"
     >
       <View style={style.header}>
-        <Typography style={style.headerGreet}>
+        <Typography size={19} style={style.headerGreet}>
           {stateOfDay()} {name?.name}!
         </Typography>
         <Image
@@ -169,6 +169,5 @@ const style = StyleSheet.create({
   },
   headerGreet: {
     color: Colors.neutral.white,
-    fontSize: 19,
   },
 });

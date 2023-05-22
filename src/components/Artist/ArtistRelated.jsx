@@ -21,7 +21,7 @@ const ArtistRelated = ({ item }) => {
         }}
         className="mr-[14px] rounded-full"
       />
-      <Typography bold styles="text-white text-[13px] mt-[10px] ml-1">
+      <Typography size={13} bold styles="text-white text-[13px] mt-[10px] ml-1">
         {item?.profile.name}
       </Typography>
     </TouchableOpacity>

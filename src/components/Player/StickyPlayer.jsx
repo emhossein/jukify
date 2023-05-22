@@ -35,13 +35,16 @@ const StickyPlayer = () => {
             />
             <View>
               <Typography
+                size={12}
                 numberOfLines={2}
                 styles="text-white text-[12px]"
                 bold
               >
                 {title}
               </Typography>
-              <Typography styles="text-white text-[10px]">{artist}</Typography>
+              <Typography size={10} styles="text-white text-[10px]">
+                {artist}
+              </Typography>
             </View>
           </View>
           <TouchableOpacity

@@ -71,7 +71,7 @@ const UserTrack = ({ item }) => {
               ? item.song.substring(0, 15) + "..."
               : item.song}
           </Typography>
-          <Typography bold styles="text-white text-xs mt-1">
+          <Typography size={12} bold styles="text-white text-xs mt-1">
             {item.artist}
           </Typography>
         </View>

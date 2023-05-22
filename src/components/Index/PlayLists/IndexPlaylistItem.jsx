@@ -33,7 +33,11 @@ const IndexPlaylistItem = ({ item }) => {
           // eslint-disable-next-line no-unused-vars
           onError={(err) => null}
         />
-        <Typography bold styles="text-white text-[13px] mt-[10px] ml-1">
+        <Typography
+          size={13}
+          bold
+          styles="text-white text-[13px] mt-[10px] ml-1"
+        >
           {item.data.name.length > 15
             ? item.data.name.substring(0, 15) + "..."
             : item.data.name}

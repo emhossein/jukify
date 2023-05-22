@@ -75,7 +75,7 @@ const PlayListTrack = ({ item }) => {
               ? item.track.name.substring(0, 15) + "..."
               : item.track.name}
           </Typography>
-          <Typography bold styles="text-white text-xs mt-1">
+          <Typography size={12} bold styles="text-white text-xs mt-1">
             {item.track.artists[0].name}
           </Typography>
         </View>

@@ -27,7 +27,7 @@ const LyricsHeader = ({ title, status }) => {
       >
         <BackIcon />
       </TouchableOpacity>
-      <Typography bold styles="text-white text-xl">
+      <Typography size={20} bold styles="text-white text-xl">
         {title.replace(/\([^()]*\)/g, "")}
       </Typography>
       <TouchableOpacity>

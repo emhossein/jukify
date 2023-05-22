@@ -62,10 +62,11 @@ const TTHScreen = ({ navigation }) => {
         renderHeader={() => (
           <View className="w-full items-center">
             <View className="items-center" style={{ width: width * 0.9 }}>
-              <Typography bold styles="text-white text-xl mt-3">
+              <Typography size={20} bold styles="text-white text-xl mt-3">
                 {tth?.result.name}
               </Typography>
               <Typography
+                size={12}
                 numberOfLines={3}
                 styles="text-center text-white-light text-xs mt-[10px]"
               >

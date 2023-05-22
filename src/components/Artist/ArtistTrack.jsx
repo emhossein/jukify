@@ -75,7 +75,7 @@ const ArtistTrack = ({ item, name }) => {
               ? item.track.name.substring(0, 15) + "..."
               : item.track.name}
           </Typography>
-          <Typography bold styles="text-white text-xs mt-1">
+          <Typography size={12} bold styles="text-white text-xs mt-1">
             {name}
           </Typography>
         </View>

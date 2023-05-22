@@ -82,13 +82,17 @@ const PlayListScreen = ({ route, navigation }) => {
             className="absolute opacity-0 -z-10 w-full items-center"
           >
             <View className="items-center" style={{ width: width * 0.9 }}>
-              <Typography bold styles="text-white text-xl mt-3">
+              <Typography size={20} bold styles="text-white text-xl mt-3">
                 {item?.name}
               </Typography>
-              <Typography styles="text-white-light text-[13px] mt-[6px]">
+              <Typography
+                size={13}
+                styles="text-white-light text-[13px] mt-[6px]"
+              >
                 {item?.tracks.items.length} Track
               </Typography>
               <Typography
+                size={12}
                 numberOfLines={3}
                 styles="text-center text-white-light text-xs mt-[10px]"
               >
@@ -109,13 +113,17 @@ const PlayListScreen = ({ route, navigation }) => {
             renderHeader={() => (
               <View className="w-full items-center">
                 <View className="items-center" style={{ width: width * 0.9 }}>
-                  <Typography bold styles="text-white text-xl mt-3">
+                  <Typography size={20} bold styles="text-white text-xl mt-3">
                     {item?.name}
                   </Typography>
-                  <Typography styles="text-white-light text-[13px] mt-[6px]">
+                  <Typography
+                    size={13}
+                    styles="text-white-light text-[13px] mt-[6px]"
+                  >
                     {item?.tracks.items.length} Track
                   </Typography>
                   <Typography
+                    size={13}
                     numberOfLines={3}
                     styles="text-center text-white-light text-xs mt-[10px]"
                   >

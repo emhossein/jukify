@@ -99,7 +99,7 @@ const AuthScreen = ({ navigation }) => {
         style={style.logo}
       />
       <View style={style.center}>
-        <Typography style={style.heading}>
+        <Typography size={32} style={style.heading}>
           {signIn ? "Sign In" : "Register"}
         </Typography>
         <Formik
@@ -162,7 +162,7 @@ const AuthScreen = ({ navigation }) => {
                 }
                 style={style.button}
               >
-                <Typography bold styles="text-white text-xl">
+                <Typography size={20} bold styles="text-white text-xl">
                   {signIn ? "Sign In" : "Create Account"}
                 </Typography>
               </TouchableOpacity>
